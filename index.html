@@ -17,9 +17,6 @@
   --text: #1a1a1a;
   --muted: #6a6a6a;
   --source: #888;
-  --capitalism-color: #1a3a5c;
-  --contested-color: #c17f24;
-  --feudal-color: #C0392B;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -38,11 +35,140 @@ h4 { font-size: 0.92rem; font-weight: 700; text-transform: uppercase; letter-spa
 p { margin-bottom: 0.8rem; }
 a { color: var(--blue); }
 
+/* ── Sticky dial: mobile top bar ── */
+#sticky-dial {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 52px;
+  background: #fff;
+  border-bottom: 2px solid var(--border);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.sticky-mobile-left {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  flex-shrink: 0;
+}
+.sticky-m-num {
+  font-size: 1.55rem;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  line-height: 1;
+  transition: color 0.3s;
+}
+.sticky-m-band {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-family: system-ui, sans-serif;
+  transition: color 0.3s;
+}
+.sticky-m-delta {
+  font-size: 0.7rem;
+  font-family: system-ui, sans-serif;
+  font-weight: 600;
+  flex-shrink: 0;
+  min-width: 60px;
+}
+.sticky-bar-wrap {
+  flex: 1;
+  height: 8px;
+  background: #e8e8e8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.sticky-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 300ms ease, background 300ms ease;
+  width: 0%;
+}
+
+/* ── Sticky dial: desktop side rail ── */
+#sticky-rail {
+  position: fixed;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 128px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.1);
+  z-index: 200;
+  padding: 10px 10px 8px;
+  text-align: center;
+  display: none;
+}
+.rail-gauge-svg { display: block; margin: 0 auto; overflow: visible; }
+.rail-num {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  line-height: 1;
+  margin-top: 2px;
+  transition: color 0.3s;
+}
+.rail-band {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-family: system-ui, sans-serif;
+  margin-top: 3px;
+  transition: color 0.3s;
+}
+.rail-delta {
+  font-size: 0.65rem;
+  font-family: system-ui, sans-serif;
+  font-weight: 600;
+  margin-top: 5px;
+  min-height: 14px;
+  line-height: 1.3;
+}
+.rail-ghost-legend {
+  margin-top: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-top: 1px solid #eee;
+  padding-top: 6px;
+}
+.rail-ghost-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.62rem;
+  font-family: system-ui, sans-serif;
+  color: var(--muted);
+}
+.rail-ghost-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Body padding for sticky elements ── */
+body { padding-top: 52px; }
+
+@media (min-width: 820px) {
+  body { padding-top: 0; }
+  #sticky-dial { display: none; }
+  #sticky-rail { display: block; }
+}
+
 /* ── Header ── */
 .site-header {
   border-top: 4px solid var(--red);
-  padding: 32px 0 20px;
-  margin-bottom: 0;
+  padding: 28px 0 20px;
   border-bottom: 1px solid var(--border);
 }
 .header-label {
@@ -57,41 +183,26 @@ a { color: var(--blue); }
   font-size: 1.05rem;
   color: var(--muted);
   max-width: 640px;
-  margin-top: 10px;
+  margin-top: 8px;
   font-style: italic;
 }
-.header-frame {
-  font-size: 0.9rem;
-  max-width: 680px;
-  color: #444;
-  margin-top: 14px;
+.header-hook {
+  font-size: 0.92rem;
+  max-width: 660px;
+  color: #333;
+  margin-top: 12px;
   line-height: 1.65;
   border-left: 3px solid var(--border);
   padding-left: 14px;
 }
-.how-to-use {
-  background: #f0f4ff;
-  border: 2px solid var(--blue);
-  border-radius: 6px;
-  padding: 16px 20px;
-  margin-top: 18px;
+.header-cta {
+  margin-top: 14px;
+  font-size: 1rem;
   font-family: system-ui, sans-serif;
-}
-.how-to-use-title {
-  font-size: 0.88rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
   color: var(--blue);
-  margin-bottom: 10px;
+  letter-spacing: 0.01em;
 }
-.how-to-use ol {
-  margin-left: 20px;
-  font-size: 0.92rem;
-  line-height: 1.75;
-  color: #222;
-}
-.how-to-use li { margin-bottom: 2px; }
 
 /* ── Section spacing ── */
 .section {
@@ -107,23 +218,63 @@ a { color: var(--blue); }
   margin-bottom: 6px;
 }
 
-/* ── TFI Gauge section ── */
+/* ── Sub-score bar ── */
+.sub-score-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  padding: 8px 10px;
+  background: var(--bg2);
+  border-radius: 4px;
+}
+.sub-score-label-text {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: system-ui, sans-serif;
+  color: var(--muted);
+  flex-shrink: 0;
+  width: 72px;
+}
+.sub-score-track {
+  flex: 1;
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.sub-score-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 280ms ease, background-color 280ms ease;
+  width: 0%;
+}
+.sub-score-num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  flex-shrink: 0;
+  width: 40px;
+  text-align: right;
+}
+
+/* ── TFI Gauge (big, in weights section) ── */
 .tfi-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 260px 1fr;
   gap: 32px;
   align-items: start;
   margin-top: 20px;
 }
-.gauge-wrap {
-  text-align: center;
-}
+.gauge-wrap { text-align: center; }
 .gauge-svg { display: block; margin: 0 auto; overflow: visible; }
 .tfi-number {
   font-size: 3.2rem;
   font-weight: 700;
   line-height: 1;
-  margin-top: -10px;
+  margin-top: -8px;
   font-family: system-ui, sans-serif;
 }
 .tfi-band {
@@ -144,7 +295,6 @@ a { color: var(--blue); }
   margin-left: auto;
   margin-right: auto;
 }
-.weights-panel { }
 .weights-title {
   font-size: 1rem;
   font-weight: 700;
@@ -171,26 +321,14 @@ a { color: var(--blue); }
   align-items: center;
   margin-bottom: 10px;
 }
-.weight-label {
-  font-size: 0.83rem;
-  font-family: system-ui, sans-serif;
-  color: var(--text);
-}
-.weight-pct {
-  font-size: 0.83rem;
-  font-family: system-ui, sans-serif;
-  font-weight: 700;
-  text-align: right;
-}
+.weight-label { font-size: 0.83rem; font-family: system-ui, sans-serif; color: var(--text); }
+.weight-pct { font-size: 0.83rem; font-family: system-ui, sans-serif; font-weight: 700; text-align: right; }
 .pillar-badge {
   display: inline-block;
-  width: 34px;
-  height: 34px;
-  line-height: 34px;
-  text-align: center;
+  width: 34px; height: 34px;
+  line-height: 34px; text-align: center;
   border-radius: 4px;
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-size: 0.78rem; font-weight: 700;
   font-family: system-ui, sans-serif;
   color: #fff;
 }
@@ -224,18 +362,14 @@ a { color: var(--blue); }
 .preset-note.visible { display: block; }
 
 /* ── Pillar sections ── */
-.pillar-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
-}
+.pillar-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
 .pillar-num {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: var(--muted);
   font-family: system-ui, sans-serif;
+  margin-bottom: 6px;
 }
 .score-badge {
   display: inline-flex;
@@ -249,12 +383,7 @@ a { color: var(--blue); }
   color: #fff;
   margin-left: auto;
 }
-.score-badge::before {
-  content: "Score";
-  font-weight: 400;
-  opacity: 0.8;
-  font-size: 0.72rem;
-}
+.score-badge::before { content: "Score"; font-weight: 400; opacity: 0.8; font-size: 0.72rem; }
 .thesis-block {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -278,9 +407,7 @@ a { color: var(--blue); }
   margin-top: 18px;
   align-items: start;
 }
-.chart-col canvas {
-  max-height: 240px;
-}
+.chart-col canvas { max-height: 240px; }
 .source-line {
   font-size: 0.75rem;
   color: var(--source);
@@ -289,7 +416,6 @@ a { color: var(--blue); }
   margin-top: 6px;
   line-height: 1.45;
 }
-.control-col { }
 .control-group { margin-bottom: 18px; }
 .control-label {
   font-size: 0.85rem;
@@ -299,11 +425,7 @@ a { color: var(--blue); }
   line-height: 1.45;
   display: block;
 }
-input[type=range] {
-  width: 100%;
-  accent-color: var(--blue);
-  cursor: pointer;
-}
+input[type=range] { width: 100%; accent-color: var(--blue); cursor: pointer; }
 .range-labels {
   display: flex;
   justify-content: space-between;
@@ -319,11 +441,7 @@ input[type=range] {
   color: var(--blue);
   margin-top: 2px;
 }
-.toggle-group {
-  display: flex;
-  gap: 0;
-  margin-top: 6px;
-}
+.toggle-group { display: flex; gap: 0; margin-top: 6px; }
 .toggle-btn {
   flex: 1;
   padding: 7px 10px;
@@ -374,6 +492,158 @@ input[type=range] {
   margin-bottom: 14px;
 }
 
+/* ── Reveal section ── */
+#reveal-section { background: #f7f5ff; }
+.reveal-wrap { max-width: 620px; }
+.reveal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: system-ui, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: background 0.15s, transform 0.1s;
+}
+.reveal-btn:hover { background: #142d47; transform: translateY(-1px); }
+.reveal-btn:active { transform: translateY(0); }
+.reveal-btn.revealed { background: var(--muted); cursor: default; transform: none; }
+#verdict-panel {
+  margin-top: 20px;
+  padding: 20px 22px;
+  background: #fff;
+  border: 2px solid var(--blue);
+  border-radius: 6px;
+  font-family: system-ui, sans-serif;
+}
+.verdict-text {
+  font-size: 0.97rem;
+  line-height: 1.7;
+  color: #222;
+  margin-bottom: 16px;
+}
+.verdict-text strong { color: var(--blue); }
+.verdict-text em { font-style: italic; }
+.save-run-btn {
+  padding: 8px 18px;
+  background: #fff;
+  border: 1.5px solid var(--blue);
+  border-radius: 3px;
+  font-size: 0.84rem;
+  font-family: system-ui, sans-serif;
+  font-weight: 600;
+  color: var(--blue);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.save-run-btn:hover { background: #eef2ff; }
+.save-run-btn:disabled { opacity: 0.5; cursor: default; }
+
+/* ── Saved runs comparison ── */
+#runs-section { background: #f0f4fa; }
+.runs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.run-card {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 5px;
+  padding: 14px;
+  position: relative;
+}
+.run-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.run-card-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+}
+.run-card-tfi {
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  line-height: 1;
+}
+.run-card-band {
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 2px;
+}
+.run-pillar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+.run-pillar-name {
+  font-size: 0.68rem;
+  font-family: system-ui, sans-serif;
+  color: var(--muted);
+  width: 58px;
+  flex-shrink: 0;
+}
+.run-pillar-track {
+  flex: 1;
+  height: 6px;
+  background: #e8e8e8;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.run-pillar-fill {
+  height: 100%;
+  border-radius: 3px;
+}
+.run-pillar-num {
+  font-size: 0.68rem;
+  font-family: system-ui, sans-serif;
+  font-weight: 700;
+  width: 24px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.delete-run-btn {
+  position: absolute;
+  top: 6px; right: 8px;
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  color: #bbb;
+  cursor: pointer;
+  padding: 2px 4px;
+  line-height: 1;
+}
+.delete-run-btn:hover { color: var(--red); }
+
+/* ── Weights section (demoted) ── */
+#weights-section { background: #fafaf8; }
+.weights-section-intro {
+  font-size: 0.9rem;
+  font-family: system-ui, sans-serif;
+  color: #444;
+  max-width: 580px;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
 /* ── Watchlist ── */
 .watchlist-grid {
   display: grid;
@@ -381,34 +651,14 @@ input[type=range] {
   gap: 14px;
   margin-top: 18px;
 }
-.watch-card {
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 14px;
-}
-.watch-indicator {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  font-family: system-ui, sans-serif;
-  margin-bottom: 6px;
-}
-.watch-signal {
-  font-size: 0.85rem;
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-}
+.watch-card { border: 1px solid var(--border); border-radius: 3px; padding: 14px; }
+.watch-indicator { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-family: system-ui, sans-serif; margin-bottom: 6px; }
+.watch-signal { font-size: 0.85rem; font-family: system-ui, sans-serif; line-height: 1.5; }
 .watch-yes { color: var(--red); font-size: 0.8rem; margin-top: 4px; font-family: system-ui, sans-serif; }
 .watch-no { color: var(--blue); font-size: 0.8rem; margin-top: 2px; font-family: system-ui, sans-serif; }
 
 /* ── Sources ── */
-.sources-list {
-  font-size: 0.82rem;
-  font-family: system-ui, sans-serif;
-  color: #555;
-  line-height: 1.7;
-}
+.sources-list { font-size: 0.82rem; font-family: system-ui, sans-serif; color: #555; line-height: 1.7; }
 .sources-list li { margin-bottom: 6px; }
 .caveats-list { margin-top: 14px; }
 
@@ -419,7 +669,6 @@ footer {
   color: var(--muted);
   font-family: system-ui, sans-serif;
   border-top: 1px solid var(--border);
-  margin-top: 0;
 }
 
 /* ── Responsive ── */
@@ -435,85 +684,39 @@ footer {
 </head>
 <body>
 
+<!-- ─── STICKY DIAL: MOBILE TOP BAR ─── -->
+<div id="sticky-dial">
+  <div class="sticky-mobile-left">
+    <span class="sticky-m-num" id="sm-num">—</span>
+    <span class="sticky-m-band" id="sm-band">—</span>
+  </div>
+  <span class="sticky-m-delta" id="sm-delta"></span>
+  <div class="sticky-bar-wrap">
+    <div class="sticky-bar-fill" id="sm-fill"></div>
+  </div>
+</div>
+
+<!-- ─── STICKY DIAL: DESKTOP SIDE RAIL ─── -->
+<div id="sticky-rail">
+  <svg id="rail-gauge" class="rail-gauge-svg" viewBox="0 0 108 68" width="108" height="68" aria-hidden="true"></svg>
+  <div class="rail-num" id="rail-num">—</div>
+  <div class="rail-band" id="rail-band">—</div>
+  <div class="rail-delta" id="rail-delta"></div>
+  <div class="rail-ghost-legend" id="rail-legend"></div>
+</div>
+
 <!-- ─── HEADER ─── -->
 <header class="site-header">
   <div class="container">
     <div class="header-label">Interactive Data Tool · Economics</div>
     <h1>Are We Leaving Capitalism?</h1>
-    <div class="header-sub">An explorer for a big, controversial idea</div>
-    <p class="header-frame">
-      <strong>The big idea:</strong> What if capitalism is slowly turning into something like feudalism — where a handful of tech giants act like medieval landlords, charging everyone else "rent" just to do business online? Greek economist Yanis Varoufakis calls this <em>technofeudalism.</em> This tool lets you test that idea against real data. <em>You set the sliders. You reach the verdict.</em>
+    <div class="header-sub">A Techno-Feudalism Explorer</div>
+    <p class="header-hook">
+      Economist Yanis Varoufakis argues that a handful of tech giants now act like medieval landlords — charging everyone else "rent" just to participate in the economy. This tool tests that claim against real data. You set the assumptions. You reach the verdict.
     </p>
-    <div class="how-to-use">
-      <div class="how-to-use-title">How to use this tool</div>
-      <ol>
-        <li><strong>Scroll through the four topics below.</strong> Each one is a clue about whether the economy looks more capitalist or feudal.</li>
-        <li><strong>Move the sliders</strong> in each section based on what <em>you</em> believe. Your score updates instantly.</li>
-        <li><strong>At the top, set how much each topic matters to you</strong> — drag the importance sliders and watch the dial change.</li>
-        <li><strong>Try a preset view</strong> (Varoufakis, The Skeptic, Centrist) to see how different starting beliefs lead to very different conclusions.</li>
-      </ol>
-    </div>
+    <p class="header-cta">Drag the sliders. Watch your verdict move.</p>
   </div>
 </header>
-
-<!-- ─── TFI COMPOSITE ─── -->
-<section class="section" id="tfi-section">
-  <div class="container">
-    <div class="section-label">Your Score</div>
-    <h2>Techno-Feudalism Index (TFI)</h2>
-    <p style="font-size:0.88rem;color:var(--muted);font-family:system-ui,sans-serif;margin-bottom:0;">
-      This dial combines your answers from all four topics into one score. <strong>0 = clearly still capitalism. 100 = clearly techno-feudal.</strong> With equal weights and real data, the needle lands in the middle — the "Contested" zone — because serious experts genuinely disagree.
-    </p>
-
-    <div class="tfi-layout">
-      <div class="gauge-wrap">
-        <svg id="gauge-svg" class="gauge-svg" width="280" height="170" viewBox="0 0 280 170" aria-label="Techno-Feudalism Index gauge"></svg>
-        <div class="tfi-number" id="tfi-number">—</div>
-        <div class="tfi-band" id="tfi-band">—</div>
-        <div class="tfi-verdict" id="tfi-verdict">Adjust controls below to compute score.</div>
-      </div>
-
-      <div>
-        <div class="weights-title">How much does each topic matter to you?</div>
-        <div class="weights-hint">Drag any slider to give a topic more or less importance. The other three automatically adjust — they always add up to 100%.</div>
-        <div class="weight-row">
-          <span class="weight-label">1. Who gets the money?</span>
-          <input type="range" id="w1" min="0" max="100" value="25" step="5">
-          <span class="weight-pct" id="w1-pct">25%</span>
-          <span class="pillar-badge" id="p1-badge">—</span>
-        </div>
-        <div class="weight-row">
-          <span class="weight-label">2. Platform power</span>
-          <input type="range" id="w2" min="0" max="100" value="25" step="5">
-          <span class="weight-pct" id="w2-pct">25%</span>
-          <span class="pillar-badge" id="p2-badge">—</span>
-        </div>
-        <div class="weight-row">
-          <span class="weight-label">3. Too few companies?</span>
-          <input type="range" id="w3" min="0" max="100" value="25" step="5">
-          <span class="weight-pct" id="w3-pct">25%</span>
-          <span class="pillar-badge" id="p3-badge">—</span>
-        </div>
-        <div class="weight-row">
-          <span class="weight-label">4. Users &amp; sellers trapped?</span>
-          <input type="range" id="w4" min="0" max="100" value="25" step="5">
-          <span class="weight-pct" id="w4-pct">25%</span>
-          <span class="pillar-badge" id="p4-badge">—</span>
-        </div>
-        <div style="display:none;" id="weight-sum-warn"></div>
-
-        <div class="presets-row" style="margin-top:16px;">
-          <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);font-family:system-ui,sans-serif;width:100%;margin-bottom:4px;">Try a pre-built view →</div>
-          <button class="preset-btn" data-preset="varoufakis">Varoufakis</button>
-          <button class="preset-btn" data-preset="skeptic">The Skeptic</button>
-          <button class="preset-btn" data-preset="centrist">Centrist</button>
-          <button class="preset-btn" data-preset="default">Reset</button>
-        </div>
-        <div class="preset-note" id="preset-note"></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ─── PILLAR 1 ─── -->
 <section class="section" id="pillar1">
@@ -550,6 +753,11 @@ footer {
           <input type="range" id="p1-rent" min="0" max="100" value="50" step="5">
           <div class="range-labels"><span>← All fair / earned</span><span>All unfair / extracted →</span></div>
           <div class="range-value" id="p1-rent-val">50%</div>
+        </div>
+        <div class="sub-score-row">
+          <span class="sub-score-label-text">Topic score</span>
+          <div class="sub-score-track"><div class="sub-score-fill" id="p1-bar"></div></div>
+          <span class="sub-score-num" id="p1-bar-num">—</span>
         </div>
         <div class="readout" id="p1-readout">
           Workers' share of output hit <strong>53.8%</strong> in Q3 2025 — the lowest recorded since 1947. It was 67.8% in 1987. Big-company profits as % of GDP: ~16% in 2024, up from ~8% in 1982.
@@ -607,6 +815,11 @@ footer {
           </div>
           <div class="range-value" id="p2-framing-label" style="margin-top:6px;color:var(--muted);">Your view: fair service pricing</div>
         </div>
+        <div class="sub-score-row">
+          <span class="sub-score-label-text">Topic score</span>
+          <div class="sub-score-track"><div class="sub-score-fill" id="p2-bar"></div></div>
+          <span class="sub-score-num" id="p2-bar-num">—</span>
+        </div>
         <div class="readout">
           Platform fees vs. selling on your own: <strong>10× to 17× higher.</strong> Is that because platforms are genuinely worth that much to sellers? Or because sellers have no real choice? Your answer to that question completely changes what the chart means.
         </div>
@@ -650,6 +863,11 @@ footer {
           <input type="range" id="p3-thresh" min="15" max="60" value="40" step="1">
           <div class="range-labels"><span>← 15% (very strict)</span><span>60% (very lenient) →</span></div>
           <div class="range-value" id="p3-thresh-val">Your limit: 40% · Actual today: 39% → <span id="p3-vs">just below</span></div>
+        </div>
+        <div class="sub-score-row">
+          <span class="sub-score-label-text">Topic score</span>
+          <div class="sub-score-track"><div class="sub-score-fill" id="p3-bar"></div></div>
+          <span class="sub-score-num" id="p3-bar-num">—</span>
         </div>
         <div class="callout skeptic">
           <h4>It has happened before</h4>
@@ -705,10 +923,101 @@ footer {
           <div class="range-labels"><span>← 0% — they have real alternatives</span><span>100% — completely locked in →</span></div>
           <div class="range-value" id="p4-smb-val">50%</div>
         </div>
+        <div class="sub-score-row">
+          <span class="sub-score-label-text">Topic score</span>
+          <div class="sub-score-track"><div class="sub-score-fill" id="p4-bar"></div></div>
+          <span class="sub-score-num" id="p4-bar-num">—</span>
+        </div>
         <div class="callout warning">
           <h4>Try this experiment</h4>
-          Go back to the top and drag the "Users &amp; sellers trapped?" importance slider all the way to 60–70%. Watch the overall score jump. This topic is the most assumption-driven one — and it moves the score the most. A good tool should make you suspicious of that.
+          Scroll down to the "Tune what matters" section and drag the "Users &amp; sellers trapped?" importance slider all the way to 60–70%. Watch the overall score jump. This topic is the most assumption-driven one — and it moves the score the most. A good tool should make you suspicious of that.
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REVEAL ─── -->
+<section class="section" id="reveal-section">
+  <div class="container">
+    <div class="reveal-wrap">
+      <div class="section-label">Your Verdict</div>
+      <h2>What do your choices say?</h2>
+      <p style="font-size:0.9rem;color:var(--muted);font-family:system-ui,sans-serif;margin-bottom:18px;">You've worked through all four topics. Hit the button to see a personalized reading of what your slider positions actually commit you to.</p>
+      <button class="reveal-btn" id="reveal-btn">See your verdict →</button>
+      <div id="verdict-panel" style="display:none;">
+        <p class="verdict-text" id="verdict-text"></p>
+        <button class="save-run-btn" id="save-run-btn">Save this run for comparison</button>
+        <span style="font-size:0.75rem;color:var(--muted);font-family:system-ui,sans-serif;margin-left:10px;" id="save-confirm"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SAVED RUNS ─── -->
+<section class="section" id="runs-section" style="display:none;">
+  <div class="container">
+    <div class="section-label">Compare</div>
+    <h2>Your saved runs</h2>
+    <p style="font-size:0.87rem;color:var(--muted);font-family:system-ui,sans-serif;margin-bottom:0;">Ghost markers for each saved run appear on the dial. Up to 3 runs saved.</p>
+    <div class="runs-grid" id="runs-grid"></div>
+  </div>
+</section>
+
+<!-- ─── WEIGHTS & SETTINGS (DEMOTED) ─── -->
+<section class="section" id="weights-section">
+  <div class="container">
+    <div class="section-label">Second-Order Experiment</div>
+    <h2>Now tune what matters to you</h2>
+    <p class="weights-section-intro">
+      You've seen all four topics at equal weight. Now adjust how much each one matters — and watch your verdict shift. This is where the meta-argument lives: not just <em>what</em> the data says, but <em>which data you think is most important.</em>
+    </p>
+
+    <div class="tfi-layout" style="margin-top:22px;">
+      <div class="gauge-wrap">
+        <svg id="gauge-svg" class="gauge-svg" width="260" height="160" viewBox="0 0 260 160" aria-label="Techno-Feudalism Index gauge"></svg>
+        <div class="tfi-number" id="tfi-number">—</div>
+        <div class="tfi-band" id="tfi-band">—</div>
+        <div class="tfi-verdict" id="tfi-verdict">Adjust controls to compute score.</div>
+      </div>
+
+      <div>
+        <div class="weights-title">How much does each topic matter to you?</div>
+        <div class="weights-hint">Drag any slider to give a topic more or less importance. The other three automatically adjust — they always add up to 100%.</div>
+        <div class="weight-row">
+          <span class="weight-label">1. Who gets the money?</span>
+          <input type="range" id="w1" min="0" max="100" value="25" step="5">
+          <span class="weight-pct" id="w1-pct">25%</span>
+          <span class="pillar-badge" id="p1-badge">—</span>
+        </div>
+        <div class="weight-row">
+          <span class="weight-label">2. Platform power</span>
+          <input type="range" id="w2" min="0" max="100" value="25" step="5">
+          <span class="weight-pct" id="w2-pct">25%</span>
+          <span class="pillar-badge" id="p2-badge">—</span>
+        </div>
+        <div class="weight-row">
+          <span class="weight-label">3. Too few companies?</span>
+          <input type="range" id="w3" min="0" max="100" value="25" step="5">
+          <span class="weight-pct" id="w3-pct">25%</span>
+          <span class="pillar-badge" id="p3-badge">—</span>
+        </div>
+        <div class="weight-row">
+          <span class="weight-label">4. Users &amp; sellers trapped?</span>
+          <input type="range" id="w4" min="0" max="100" value="25" step="5">
+          <span class="weight-pct" id="w4-pct">25%</span>
+          <span class="pillar-badge" id="p4-badge">—</span>
+        </div>
+        <div style="display:none;" id="weight-sum-warn"></div>
+
+        <div class="presets-row" style="margin-top:16px;">
+          <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);font-family:system-ui,sans-serif;width:100%;margin-bottom:4px;">Try a pre-built view →</div>
+          <button class="preset-btn" data-preset="varoufakis">Varoufakis</button>
+          <button class="preset-btn" data-preset="skeptic">The Skeptic</button>
+          <button class="preset-btn" data-preset="centrist">Centrist</button>
+          <button class="preset-btn" data-preset="default">Reset</button>
+        </div>
+        <div class="preset-note" id="preset-note"></div>
       </div>
     </div>
   </div>
@@ -804,11 +1113,7 @@ function interpolateSeries(anchors) {
     const span = b.year - a.year;
     for (let y = a.year; y < b.year; y++) {
       const t = (y - a.year) / span;
-      result.push({
-        year: y,
-        value: parseFloat((a.value + t * (b.value - a.value)).toFixed(2)),
-        type: (y === a.year) ? a.type : "interpolated"
-      });
+      result.push({ year: y, value: parseFloat((a.value + t * (b.value - a.value)).toFixed(2)), type: y === a.year ? a.type : "interpolated" });
     }
   }
   result.push({ ...anchors[anchors.length - 1] });
@@ -946,7 +1251,7 @@ const state = {
 };
 
 // ═══════════════════════════════════════════
-// GAUGE
+// GAUGE MATH (shared)
 // ═══════════════════════════════════════════
 
 function tfiToPoint(cx, cy, r, tfi) {
@@ -962,49 +1267,141 @@ function arcPath(cx, cy, r, tfi1, tfi2) {
   return `M ${p1.x.toFixed(2)} ${p1.y.toFixed(2)} A ${r} ${r} 0 ${large} 0 ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
 }
 
+// ═══════════════════════════════════════════
+// MAIN BIG GAUGE
+// ═══════════════════════════════════════════
+
 function drawGauge(tfi) {
   const svg = document.getElementById("gauge-svg");
-  const cx = 140, cy = 155, r = 115, sw = 22;
+  const cx = 130, cy = 145, r = 108, sw = 20;
   const zones = [
-    { from: 0, to: 40, color: "#d0dcea", label: "Capitalism" },
-    { from: 40, to: 65, color: "#f3dfa8", label: "Contested" },
-    { from: 65, to: 100, color: "#f0c4be", label: "Techno-Feudal" }
+    { from: 0, to: 40, color: "#d0dcea" },
+    { from: 40, to: 65, color: "#f3dfa8" },
+    { from: 65, to: 100, color: "#f0c4be" }
   ];
-
-  let html = "";
-
-  html += `<path d="${arcPath(cx, cy, r, 0, 100)}" fill="none" stroke="#e0e0e0" stroke-width="${sw}" stroke-linecap="butt"/>`;
-
+  let html = `<path d="${arcPath(cx, cy, r, 0, 100)}" fill="none" stroke="#e0e0e0" stroke-width="${sw}" stroke-linecap="butt"/>`;
   zones.forEach(z => {
     html += `<path d="${arcPath(cx, cy, r, z.from, z.to)}" fill="none" stroke="${z.color}" stroke-width="${sw}" stroke-linecap="butt"/>`;
   });
-
-  const zoneLabels = [
-    { tfi: 20, label: "Capitalism" },
-    { tfi: 52, label: "Contested" },
-    { tfi: 82, label: "Feudal" }
-  ];
-  zoneLabels.forEach(zl => {
-    const pt2 = tfiToPoint(cx, cy, r + 20, zl.tfi);
-    html += `<text x="${pt2.x.toFixed(1)}" y="${pt2.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="system-ui,sans-serif" fill="#888" font-weight="600">${zl.label}</text>`;
+  [{ tfi: 20, label: "Capitalism" }, { tfi: 52, label: "Contested" }, { tfi: 82, label: "Feudal" }].forEach(zl => {
+    const pt = tfiToPoint(cx, cy, r + 18, zl.tfi);
+    html += `<text x="${pt.x.toFixed(1)}" y="${pt.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="system-ui,sans-serif" fill="#888" font-weight="600">${zl.label}</text>`;
   });
-
   for (let t = 0; t <= 100; t += 10) {
-    const inner = tfiToPoint(cx, cy, r - sw / 2 - 3, t);
-    const outer = tfiToPoint(cx, cy, r + sw / 2 + 3, t);
+    const inner = tfiToPoint(cx, cy, r - sw / 2 - 2, t);
+    const outer = tfiToPoint(cx, cy, r + sw / 2 + 2, t);
     html += `<line x1="${inner.x.toFixed(1)}" y1="${inner.y.toFixed(1)}" x2="${outer.x.toFixed(1)}" y2="${outer.y.toFixed(1)}" stroke="#bbb" stroke-width="1"/>`;
   }
-
-  const needleTip = tfiToPoint(cx, cy, r - 4, tfi);
-  const needleBase = tfiToPoint(cx, cy, -18, tfi);
-  const needleLeft = tfiToPoint(cx, cy, 8, tfi - 4);
-  const needleRight = tfiToPoint(cx, cy, 8, tfi + 4);
-  html += `<polygon points="${needleTip.x.toFixed(1)},${needleTip.y.toFixed(1)} ${needleLeft.x.toFixed(1)},${needleLeft.y.toFixed(1)} ${needleBase.x.toFixed(1)},${needleBase.y.toFixed(1)} ${needleRight.x.toFixed(1)},${needleRight.y.toFixed(1)}" fill="#333"/>`;
-
-  html += `<circle cx="${cx}" cy="${cy}" r="7" fill="#333"/>`;
-  html += `<circle cx="${cx}" cy="${cy}" r="4" fill="#fff"/>`;
-
+  const tip = tfiToPoint(cx, cy, r - 4, tfi);
+  const base = tfiToPoint(cx, cy, -16, tfi);
+  const left = tfiToPoint(cx, cy, 8, tfi - 4);
+  const right = tfiToPoint(cx, cy, 8, tfi + 4);
+  html += `<polygon points="${tip.x.toFixed(1)},${tip.y.toFixed(1)} ${left.x.toFixed(1)},${left.y.toFixed(1)} ${base.x.toFixed(1)},${base.y.toFixed(1)} ${right.x.toFixed(1)},${right.y.toFixed(1)}" fill="#333"/>`;
+  html += `<circle cx="${cx}" cy="${cy}" r="7" fill="#333"/><circle cx="${cx}" cy="${cy}" r="4" fill="#fff"/>`;
   svg.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════
+// STICKY RAIL GAUGE (mini, CSS-animated)
+// ═══════════════════════════════════════════
+
+const GHOST_CONFIGS = [
+  { key: "varoufakis", label: "Varoufakis", color: "#C0392B" },
+  { key: "skeptic",    label: "Skeptic",    color: "#1a3a5c" },
+  { key: "centrist",   label: "Centrist",   color: "#c17f24" }
+];
+
+let PRESET_TFIS = {};
+let savedRuns = [];
+let lastTfi = null;
+let deltaClearTimer = null;
+
+function initRailGauge() {
+  const svg = document.getElementById("rail-gauge");
+  if (!svg) return;
+  const cx = 54, cy = 62, r = 48, sw = 10;
+  let html = `<path d="${arcPath(cx, cy, r, 0, 100)}" fill="none" stroke="#e8e8e8" stroke-width="${sw}" stroke-linecap="butt"/>`;
+  html += `<path d="${arcPath(cx, cy, r, 0, 40)}"  fill="none" stroke="#d0dcea" stroke-width="${sw}" stroke-linecap="butt"/>`;
+  html += `<path d="${arcPath(cx, cy, r, 40, 65)}" fill="none" stroke="#f3dfa8" stroke-width="${sw}" stroke-linecap="butt"/>`;
+  html += `<path d="${arcPath(cx, cy, r, 65, 100)}" fill="none" stroke="#f0c4be" stroke-width="${sw}" stroke-linecap="butt"/>`;
+  html += `<g id="rail-ghosts"></g>`;
+  html += `<g id="rail-needle" style="transform-origin:${cx}px ${cy}px;transition:transform 280ms cubic-bezier(0.34,1.2,0.64,1);">`;
+  html += `<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy - r + 6}" stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round"/>`;
+  html += `</g>`;
+  html += `<circle cx="${cx}" cy="${cy}" r="4.5" fill="#333"/><circle cx="${cx}" cy="${cy}" r="2.5" fill="#fff"/>`;
+  svg.innerHTML = html;
+
+  renderRailLegend();
+}
+
+function railNeedleAngle(tfi) {
+  return (tfi - 50) * 1.8;
+}
+
+function updateRailGhosts() {
+  const ghosts = document.getElementById("rail-ghosts");
+  if (!ghosts) return;
+  const cx = 54, cy = 62, r = 42;
+
+  const items = savedRuns.length > 0
+    ? savedRuns.map((run, i) => ({ tfi: run.tfi, color: GHOST_CONFIGS[i % GHOST_CONFIGS.length].color, label: run.label }))
+    : GHOST_CONFIGS.map(g => ({ tfi: PRESET_TFIS[g.key] || 50, color: g.color, label: g.label[0] }));
+
+  let html = "";
+  items.forEach(item => {
+    const ang = railNeedleAngle(item.tfi) * Math.PI / 180;
+    const x2 = cx + (r - 2) * Math.sin(ang);
+    const y2 = cy - (r - 2) * Math.cos(ang);
+    html += `<line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${item.color}" stroke-width="1.8" stroke-linecap="round" opacity="0.45"/>`;
+  });
+  ghosts.innerHTML = html;
+}
+
+function renderRailLegend() {
+  const legend = document.getElementById("rail-legend");
+  if (!legend) return;
+  const items = savedRuns.length > 0
+    ? savedRuns.map((run, i) => ({ label: run.label, color: GHOST_CONFIGS[i % GHOST_CONFIGS.length].color }))
+    : GHOST_CONFIGS.map(g => ({ label: g.label, color: g.color }));
+  legend.innerHTML = items.map(item =>
+    `<div class="rail-ghost-item"><div class="rail-ghost-dot" style="background:${item.color};opacity:0.55;"></div><span>${item.label}</span></div>`
+  ).join("");
+}
+
+function updateStickyDials(tfi, info) {
+  const angle = railNeedleAngle(tfi);
+  const needle = document.getElementById("rail-needle");
+  if (needle) needle.style.transform = `rotate(${angle}deg)`;
+
+  const railNum = document.getElementById("rail-num");
+  const railBand = document.getElementById("rail-band");
+  const railDelta = document.getElementById("rail-delta");
+  if (railNum)  { railNum.textContent = tfi; railNum.style.color = info.color; }
+  if (railBand) { railBand.textContent = info.band.split(" ")[0]; railBand.style.color = info.color; }
+
+  const smNum  = document.getElementById("sm-num");
+  const smBand = document.getElementById("sm-band");
+  const smFill = document.getElementById("sm-fill");
+  const smDelta = document.getElementById("sm-delta");
+  if (smNum)  { smNum.textContent = tfi; smNum.style.color = info.color; }
+  if (smBand) { smBand.textContent = info.band.split(" ")[0]; smBand.style.color = info.color; }
+  if (smFill) { smFill.style.width = tfi + "%"; smFill.style.background = info.color; }
+
+  if (lastTfi !== null) {
+    const delta = tfi - lastTfi;
+    if (Math.abs(delta) >= 1) {
+      const deltaText = (delta > 0 ? "▲ +" : "▼ ") + delta;
+      const deltaColor = delta > 0 ? "#C0392B" : "#1a3a5c";
+      if (railDelta) { railDelta.textContent = deltaText; railDelta.style.color = deltaColor; }
+      if (smDelta)   { smDelta.textContent = deltaText;   smDelta.style.color = deltaColor; }
+      clearTimeout(deltaClearTimer);
+      deltaClearTimer = setTimeout(() => {
+        if (railDelta) railDelta.textContent = "";
+        if (smDelta)   smDelta.textContent = "";
+      }, 4000);
+    }
+  }
+  lastTfi = tfi;
 }
 
 // ═══════════════════════════════════════════
@@ -1028,49 +1425,17 @@ function initCharts() {
     type: "line",
     data: {
       datasets: [
-        {
-          label: "Workers' share of output (%)",
-          data: laborXY,
-          borderColor: "#1a3a5c",
-          backgroundColor: "rgba(26,58,92,0.08)",
-          borderWidth: 2,
-          pointRadius: laborRadii,
-          pointBackgroundColor: "#1a3a5c",
-          tension: 0.3,
-          fill: false
-        },
-        {
-          label: "Corporate profit share (% of GDP) — estimate",
-          data: profitXY,
-          borderColor: "#C0392B",
-          backgroundColor: "rgba(192,57,43,0.07)",
-          borderWidth: 2,
-          pointRadius: profitRadii,
-          pointBackgroundColor: "#C0392B",
-          tension: 0.3,
-          fill: false
-        }
+        { label: "Workers' share of output (%)", data: laborXY, borderColor: "#1a3a5c", backgroundColor: "rgba(26,58,92,0.08)", borderWidth: 2, pointRadius: laborRadii, pointBackgroundColor: "#1a3a5c", tension: 0.3, fill: false },
+        { label: "Corporate profit share (% of GDP) — estimate", data: profitXY, borderColor: "#C0392B", backgroundColor: "rgba(192,57,43,0.07)", borderWidth: 2, pointRadius: profitRadii, pointBackgroundColor: "#C0392B", tension: 0.3, fill: false }
       ]
     },
     options: {
       responsive: true,
       interaction: { mode: "index", intersect: false },
-      plugins: {
-        legend: { position: "top", labels: { boxWidth: 14, font: { size: 10 } } },
-        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } }
-      },
+      plugins: { legend: { position: "top", labels: { boxWidth: 14, font: { size: 10 } } }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } } },
       scales: {
-        x: {
-          type: "linear",
-          min: 1947, max: 2026,
-          ticks: { stepSize: 10, callback: v => v },
-          title: { display: true, text: "Year" }
-        },
-        y: {
-          min: 0, max: 80,
-          title: { display: true, text: "Share (%)" },
-          ticks: { callback: v => v + "%" }
-        }
+        x: { type: "linear", min: 1947, max: 2026, ticks: { stepSize: 10, callback: v => v }, title: { display: true, text: "Year" } },
+        y: { min: 0, max: 80, title: { display: true, text: "Share (%)" }, ticks: { callback: v => v + "%" } }
       }
     }
   });
@@ -1079,41 +1444,17 @@ function initCharts() {
     type: "bar",
     data: {
       labels: ["Open e-commerce", "App Store / Play\n(standard rate)", "Amazon blended\n(fees + ads + FBA)"],
-      datasets: [{
-        label: "Take-rate (% of seller revenue)",
-        data: [4, 30, 50],
-        backgroundColor: ["rgba(30,107,62,0.8)", "rgba(193,127,36,0.8)", "rgba(192,57,43,0.8)"],
-        borderColor: ["#1e6b3e", "#c17f24", "#C0392B"],
-        borderWidth: 1.5
-      }]
+      datasets: [{ label: "Take-rate (% of seller revenue)", data: [4, 30, 50], backgroundColor: ["rgba(30,107,62,0.8)", "rgba(193,127,36,0.8)", "rgba(192,57,43,0.8)"], borderColor: ["#1e6b3e", "#c17f24", "#C0392B"], borderWidth: 1.5 }]
     },
     options: {
-      indexAxis: "y",
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => {
-              const notes = ["~3–5% blended", "30% (15% small dev)", "~45–51% (estimate)"];
-              return `${ctx.parsed.x}% — ${notes[ctx.dataIndex]}`;
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          min: 0, max: 60,
-          title: { display: true, text: "Cut taken from each sale (%)" },
-          ticks: { callback: v => v + "%" }
-        },
-        y: { ticks: { font: { size: 10 } } }
-      }
+      indexAxis: "y", responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => { const notes = ["~3–5% blended", "30% (15% small dev)", "~45–51% (estimate)"]; return `${ctx.parsed.x}% — ${notes[ctx.dataIndex]}`; } } } },
+      scales: { x: { min: 0, max: 60, title: { display: true, text: "Cut taken from each sale (%)" }, ticks: { callback: v => v + "%" } }, y: { ticks: { font: { size: 10 } } } }
     }
   });
 
   const p3years = CONCENTRATION_DATA.map(d => d.year);
-  const p3vals = CONCENTRATION_DATA.map(d => d.value);
+  const p3vals  = CONCENTRATION_DATA.map(d => d.value);
   const p3radii = CONCENTRATION_DATA.map(d => d.type === "measured" ? 5 : 2);
 
   chartP3 = new Chart(document.getElementById("chart-p3"), {
@@ -1121,46 +1462,16 @@ function initCharts() {
     data: {
       labels: p3years,
       datasets: [
-        {
-          label: "Top-10 companies' share of S&P 500 (%)",
-          data: p3vals,
-          borderColor: "#C0392B",
-          backgroundColor: "rgba(192,57,43,0.08)",
-          borderWidth: 2.5,
-          pointRadius: p3radii,
-          pointBackgroundColor: p3radii.map(r => r > 2 ? "#C0392B" : "rgba(192,57,43,0.4)"),
-          tension: 0.3,
-          fill: true
-        },
-        {
-          label: "Your 'too dominant' threshold",
-          data: p3years.map(() => state.p3_thresh),
-          borderColor: "#c17f24",
-          borderDash: [6, 4],
-          borderWidth: 1.5,
-          pointRadius: 0,
-          fill: false
-        }
+        { label: "Top-10 companies' share of S&P 500 (%)", data: p3vals, borderColor: "#C0392B", backgroundColor: "rgba(192,57,43,0.08)", borderWidth: 2.5, pointRadius: p3radii, pointBackgroundColor: p3radii.map(r => r > 2 ? "#C0392B" : "rgba(192,57,43,0.4)"), tension: 0.3, fill: true },
+        { label: "Your 'too dominant' threshold", data: p3years.map(() => state.p3_thresh), borderColor: "#c17f24", borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0, fill: false }
       ]
     },
     options: {
       responsive: true,
-      plugins: {
-        legend: { position: "top", labels: { boxWidth: 14, font: { size: 10 } } },
-        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } }
-      },
+      plugins: { legend: { position: "top", labels: { boxWidth: 14, font: { size: 10 } } }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } } },
       scales: {
-        x: {
-          type: "linear",
-          min: 1999, max: 2027,
-          ticks: { stepSize: 4, callback: v => v },
-          title: { display: true, text: "Year" }
-        },
-        y: {
-          min: 0, max: 55,
-          title: { display: true, text: "% of S&P 500 total value" },
-          ticks: { callback: v => v + "%" }
-        }
+        x: { type: "linear", min: 1999, max: 2027, ticks: { stepSize: 4, callback: v => v }, title: { display: true, text: "Year" } },
+        y: { min: 0, max: 55, title: { display: true, text: "% of S&P 500 total value" }, ticks: { callback: v => v + "%" } }
       }
     }
   });
@@ -1170,18 +1481,21 @@ function initCharts() {
 // UPDATE
 // ═══════════════════════════════════════════
 
-function updateAll() {
-  const scores = [
+function getCurrentScores() {
+  return [
     pillar1Score(state.p1_rent / 100),
     pillar2Score(state.p2_dep / 100, state.p2_feudal),
     pillar3Score(state.p3_thresh),
     pillar4Score(state.p4_ugc / 100, state.p4_smb / 100)
   ];
+}
 
+function updateAll() {
+  const scores = getCurrentScores();
   const tfi = compositeScore(scores, state.weights);
   const info = bandInfo(tfi);
-  const totalW = state.weights.reduce((a, b) => a + b, 0);
 
+  // Main big gauge (in weights section)
   document.getElementById("tfi-number").textContent = tfi;
   document.getElementById("tfi-number").style.color = info.color;
   document.getElementById("tfi-band").textContent = info.band;
@@ -1189,42 +1503,46 @@ function updateAll() {
   document.getElementById("tfi-verdict").textContent = info.verdict;
   drawGauge(tfi);
 
-  const warn = document.getElementById("weight-sum-warn");
-  if (totalW !== 100) {
-    warn.textContent = `⚠ Weights sum to ${totalW}% (normalized to 100% for score)`;
-    warn.style.color = "#c17f24";
-  } else {
-    warn.textContent = "";
-  }
+  // Sticky dials
+  updateStickyDials(tfi, info);
 
+  // Pillar badges (in weight sliders)
   scores.forEach((s, i) => {
     const el = document.getElementById(`p${i+1}-badge`);
     el.textContent = s;
     el.style.background = badgeColor(s);
   });
 
+  // Per-pillar score badges (in section headers)
   scores.forEach((s, i) => {
     const el = document.getElementById(`p${i+1}-score-badge`);
     el.textContent = s + " / 100";
     el.style.background = badgeColor(s);
   });
 
+  // Sub-score bars
+  scores.forEach((s, i) => {
+    const bar = document.getElementById(`p${i+1}-bar`);
+    const num = document.getElementById(`p${i+1}-bar-num`);
+    if (bar) { bar.style.width = s + "%"; bar.style.backgroundColor = badgeColor(s); }
+    if (num) { num.textContent = s + "/100"; num.style.color = badgeColor(s); }
+  });
+
+  // Threshold chart + readout
   if (chartP3) {
     chartP3.data.datasets[1].data = CONCENTRATION_DATA.map(() => state.p3_thresh);
     chartP3.update("none");
   }
-
   const actual = 39;
   const vsEl = document.getElementById("p3-vs");
   if (vsEl) {
-    if (actual > state.p3_thresh) {
-      vsEl.textContent = `above your limit by ${(actual - state.p3_thresh).toFixed(0)}pp → feudal signal`;
-      vsEl.style.color = "#C0392B";
-    } else {
-      vsEl.textContent = `below your limit by ${(state.p3_thresh - actual).toFixed(0)}pp → within normal`;
-      vsEl.style.color = "#1a3a5c";
-    }
+    if (actual > state.p3_thresh) { vsEl.textContent = `above your limit by ${actual - state.p3_thresh}pp → feudal signal`; vsEl.style.color = "#C0392B"; }
+    else { vsEl.textContent = `below your limit by ${state.p3_thresh - actual}pp → within normal`; vsEl.style.color = "#1a3a5c"; }
   }
+
+  const warn = document.getElementById("weight-sum-warn");
+  const totalW = state.weights.reduce((a, b) => a + b, 0);
+  if (warn) warn.textContent = totalW !== 100 ? `⚠ Weights sum to ${totalW}% (normalized)` : "";
 }
 
 // ═══════════════════════════════════════════
@@ -1235,9 +1553,7 @@ function setFraming(isFeudal) {
   state.p2_feudal = isFeudal;
   document.getElementById("p2-service-btn").classList.toggle("active", !isFeudal);
   document.getElementById("p2-feudal-btn").classList.toggle("active", isFeudal);
-  document.getElementById("p2-framing-label").textContent = isFeudal
-    ? "Your view: unfair tollbooth rent (↑ raises score)"
-    : "Your view: fair service pricing (↓ lowers score)";
+  document.getElementById("p2-framing-label").textContent = isFeudal ? "Your view: unfair tollbooth rent (↑ raises score)" : "Your view: fair service pricing (↓ lowers score)";
   document.getElementById("p2-framing-label").style.color = isFeudal ? "#C0392B" : "#555";
   updateAll();
 }
@@ -1247,26 +1563,19 @@ function setWeightLinked(changedIdx, newValue) {
   const others = [0, 1, 2, 3].filter(i => i !== changedIdx);
   const otherSum = others.reduce((s, i) => s + state.weights[i], 0);
   const remaining = 100 - val;
-
   if (otherSum === 0) {
     const base = Math.floor(remaining / 3);
     others.forEach((idx, j) => { state.weights[idx] = j < 2 ? base : remaining - base * 2; });
   } else {
     let allocated = 0;
     others.forEach((idx, j) => {
-      if (j < 2) {
-        state.weights[idx] = Math.round(state.weights[idx] / otherSum * remaining);
-        allocated += state.weights[idx];
-      } else {
-        state.weights[idx] = remaining - allocated;
-      }
+      if (j < 2) { state.weights[idx] = Math.round(state.weights[idx] / otherSum * remaining); allocated += state.weights[idx]; }
+      else { state.weights[idx] = remaining - allocated; }
     });
   }
   state.weights[changedIdx] = val;
-
   const drift = 100 - state.weights.reduce((a, b) => a + b, 0);
   if (drift !== 0) state.weights[others[others.length - 1]] += drift;
-
   [0, 1, 2, 3].forEach(i => {
     document.getElementById(`w${i + 1}`).value = state.weights[i];
     document.getElementById(`w${i + 1}-pct`).textContent = state.weights[i] + "%";
@@ -1276,35 +1585,28 @@ function setWeightLinked(changedIdx, newValue) {
 
 function bindControls() {
   ["w1","w2","w3","w4"].forEach((id, i) => {
-    document.getElementById(id).addEventListener("input", e => {
-      setWeightLinked(i, parseInt(e.target.value));
-    });
+    document.getElementById(id).addEventListener("input", e => setWeightLinked(i, parseInt(e.target.value)));
   });
-
   document.getElementById("p1-rent").addEventListener("input", e => {
     state.p1_rent = parseInt(e.target.value);
     document.getElementById("p1-rent-val").textContent = state.p1_rent + "%";
     updateAll();
   });
-
   document.getElementById("p2-dep").addEventListener("input", e => {
     state.p2_dep = parseInt(e.target.value);
     document.getElementById("p2-dep-val").textContent = state.p2_dep + "%";
     updateAll();
   });
-
   document.getElementById("p3-thresh").addEventListener("input", e => {
     state.p3_thresh = parseInt(e.target.value);
     document.getElementById("p3-thresh-val").innerHTML = `Your limit: ${state.p3_thresh}% · Actual today: 39% → <span id="p3-vs"></span>`;
     updateAll();
   });
-
   document.getElementById("p4-ugc").addEventListener("input", e => {
     state.p4_ugc = parseInt(e.target.value);
     document.getElementById("p4-ugc-val").textContent = state.p4_ugc + "%";
     updateAll();
   });
-
   document.getElementById("p4-smb").addEventListener("input", e => {
     state.p4_smb = parseInt(e.target.value);
     document.getElementById("p4-smb-val").textContent = state.p4_smb + "%";
@@ -1318,27 +1620,19 @@ function bindControls() {
 
 const PRESETS = {
   varoufakis: {
-    weights: [30, 30, 25, 15],
-    p1_rent: 90, p2_dep: 90, p2_feudal: true,
-    p3_thresh: 25, p4_ugc: 90, p4_smb: 85,
+    weights: [30, 30, 25, 15], p1_rent: 90, p2_dep: 90, p2_feudal: true, p3_thresh: 25, p4_ugc: 90, p4_smb: 85,
     note: "Varoufakis's view: most profit growth is rent, not innovation; platform fees are feudal tolls; today's concentration is historically unique; users are unpaid laborers. Requires accepting the strongest form of all four claims at once."
   },
   skeptic: {
-    weights: [20, 20, 40, 20],
-    p1_rent: 10, p2_dep: 20, p2_feudal: false,
-    p3_thresh: 50, p4_ugc: 10, p4_smb: 15,
+    weights: [20, 20, 40, 20], p1_rent: 10, p2_dep: 20, p2_feudal: false, p3_thresh: 50, p4_ugc: 10, p4_smb: 15,
     note: "The skeptic's view: profit growth reflects real productivity gains; platforms compete and provide genuine value; concentration is historically normal and cyclical; users trade data for services they want. Puts the most weight on market structure."
   },
   centrist: {
-    weights: [25, 25, 25, 25],
-    p1_rent: 50, p2_dep: 60, p2_feudal: false,
-    p3_thresh: 40, p4_ugc: 50, p4_smb: 50,
+    weights: [25, 25, 25, 25], p1_rent: 50, p2_dep: 60, p2_feudal: false, p3_thresh: 40, p4_ugc: 50, p4_smb: 50,
     note: "The centrist view: equal weight to all four topics, neutral assumptions throughout. Labor share decline is real but its cause is contested. Platform fees are high but partly justified. Concentration is near record levels. The honest answer is: we don't know yet."
   },
   default: {
-    weights: [25, 25, 25, 25],
-    p1_rent: 50, p2_dep: 60, p2_feudal: false,
-    p3_thresh: 40, p4_ugc: 50, p4_smb: 50,
+    weights: [25, 25, 25, 25], p1_rent: 50, p2_dep: 60, p2_feudal: false, p3_thresh: 40, p4_ugc: 50, p4_smb: 50,
     note: null
   }
 };
@@ -1346,17 +1640,8 @@ const PRESETS = {
 function applyPreset(name) {
   const p = PRESETS[name];
   if (!p) return;
-
-  Object.assign(state, {
-    weights: [...p.weights],
-    p1_rent: p.p1_rent, p2_dep: p.p2_dep, p2_feudal: p.p2_feudal,
-    p3_thresh: p.p3_thresh, p4_ugc: p.p4_ugc, p4_smb: p.p4_smb
-  });
-
-  ["w1","w2","w3","w4"].forEach((id, i) => {
-    document.getElementById(id).value = state.weights[i];
-    document.getElementById(`${id}-pct`).textContent = state.weights[i] + "%";
-  });
+  Object.assign(state, { weights: [...p.weights], p1_rent: p.p1_rent, p2_dep: p.p2_dep, p2_feudal: p.p2_feudal, p3_thresh: p.p3_thresh, p4_ugc: p.p4_ugc, p4_smb: p.p4_smb });
+  ["w1","w2","w3","w4"].forEach((id, i) => { document.getElementById(id).value = state.weights[i]; document.getElementById(`${id}-pct`).textContent = state.weights[i] + "%"; });
   document.getElementById("p1-rent").value = state.p1_rent;
   document.getElementById("p1-rent-val").textContent = state.p1_rent + "%";
   document.getElementById("p2-dep").value = state.p2_dep;
@@ -1368,19 +1653,147 @@ function applyPreset(name) {
   document.getElementById("p4-smb").value = state.p4_smb;
   document.getElementById("p4-smb-val").textContent = state.p4_smb + "%";
   setFraming(state.p2_feudal);
-
   document.querySelectorAll(".preset-btn").forEach(btn => btn.classList.remove("active"));
   document.querySelector(`[data-preset="${name}"]`).classList.add("active");
-
   const noteEl = document.getElementById("preset-note");
-  if (p.note) {
-    noteEl.textContent = p.note;
-    noteEl.classList.add("visible");
-  } else {
-    noteEl.classList.remove("visible");
+  if (p.note) { noteEl.textContent = p.note; noteEl.classList.add("visible"); }
+  else { noteEl.classList.remove("visible"); }
+  updateAll();
+}
+
+// ═══════════════════════════════════════════
+// REVEAL + VERDICT
+// ═══════════════════════════════════════════
+
+function generateVerdictText(tfi, scores, weights) {
+  const info = bandInfo(tfi);
+  const pillarNames = [
+    "how profits are distributed (Topic 1)",
+    "platform dependency (Topic 2)",
+    "market concentration (Topic 3)",
+    "user and seller lock-in (Topic 4)"
+  ];
+  const totalW = weights.reduce((a, b) => a + b, 0);
+  const contributions = scores.map((s, i) => (s * weights[i]) / totalW);
+  const sortedIdx = [0,1,2,3].sort((a, b) => contributions[b] - contributions[a]);
+  const top = sortedIdx[0], second = sortedIdx[1];
+
+  const commitments = [];
+  if (state.p1_rent >= 65) commitments.push("most profit growth is monopoly rent rather than earned innovation");
+  else if (state.p1_rent <= 35) commitments.push("most profit growth reflects genuine productivity and competition");
+  if (state.p2_feudal) commitments.push("platform fees are unfair tolls, not fair prices for a real service");
+  else commitments.push("platform fees are mostly fair prices for a genuinely useful service");
+  if (state.p3_thresh <= 30) commitments.push("today's stock market concentration crosses the danger line");
+  else if (state.p3_thresh >= 50) commitments.push("today's concentration is within historical norms");
+  if (state.p4_ugc >= 65 || state.p4_smb >= 65) commitments.push("users and small businesses are significantly trapped with few real alternatives");
+  else if (state.p4_ugc <= 25 && state.p4_smb <= 25) commitments.push("users and small businesses have meaningful exit options");
+
+  let text = `Your reading of the data lands at <strong>TFI ${tfi} — ${info.band}</strong>. `;
+  text += `The score was driven most by <strong>${pillarNames[top]}</strong>`;
+  if (contributions[second] > contributions[top] * 0.6) text += ` and <strong>${pillarNames[second]}</strong>`;
+  text += `. `;
+
+  if (commitments.length >= 2) {
+    text += `The interpretive choices that shaped this most: you assumed <em>${commitments[0]}</em>, and <em>${commitments[1]}</em>. `;
+  } else if (commitments.length === 1) {
+    text += `The key interpretive choice: you assumed <em>${commitments[0]}</em>. `;
   }
 
-  updateAll();
+  if (tfi >= 65) {
+    text += `Reaching the Techno-Feudal zone requires accepting several strong claims simultaneously — these are Varoufakis's claims, not established consensus. That's worth sitting with.`;
+  } else if (tfi < 40) {
+    text += `Landing in the Capitalism zone typically means accepting that current profit growth and platform fees are largely fair and earned. That's the mainstream view — but it's still a choice, not a fact.`;
+  } else {
+    text += `The Contested zone is where most serious economists land — acknowledging real structural changes while disagreeing about what they mean.`;
+  }
+  return text;
+}
+
+function initReveal() {
+  const btn = document.getElementById("reveal-btn");
+  btn.addEventListener("click", () => {
+    const scores = getCurrentScores();
+    const tfi = compositeScore(scores, state.weights);
+    const html = generateVerdictText(tfi, scores, state.weights);
+    document.getElementById("verdict-text").innerHTML = html;
+    document.getElementById("verdict-panel").style.display = "block";
+    btn.classList.add("revealed");
+    btn.textContent = "Verdict shown ✓";
+    btn.disabled = true;
+
+    // Re-enable reveal refresh on next change
+    const refreshReveal = () => {
+      btn.classList.remove("revealed");
+      btn.textContent = "Refresh your verdict →";
+      btn.disabled = false;
+      document.getElementById("verdict-panel").style.display = "none";
+      document.getElementById("save-confirm").textContent = "";
+      document.removeEventListener("input", refreshReveal);
+    };
+    setTimeout(() => document.addEventListener("input", refreshReveal, { once: true }), 500);
+  });
+
+  document.getElementById("save-run-btn").addEventListener("click", () => {
+    const scores = getCurrentScores();
+    const tfi = compositeScore(scores, state.weights);
+    const info = bandInfo(tfi);
+    if (savedRuns.length >= 3) savedRuns.shift();
+    savedRuns.push({
+      id: Date.now(),
+      label: "Run " + (savedRuns.length + 1),
+      tfi,
+      scores: [...scores],
+      weights: [...state.weights],
+      band: info.band,
+      color: info.color
+    });
+    renderRunsSection();
+    document.getElementById("save-confirm").textContent = "Saved! Scroll down to compare.";
+    document.getElementById("save-run-btn").disabled = true;
+    updateRailGhosts();
+    renderRailLegend();
+  });
+}
+
+// ═══════════════════════════════════════════
+// RUNS COMPARISON
+// ═══════════════════════════════════════════
+
+const PILLAR_SHORTS = ["Profits", "Platforms", "Concentration", "Lock-in"];
+
+function renderRunsSection() {
+  const section = document.getElementById("runs-section");
+  const grid = document.getElementById("runs-grid");
+  if (!savedRuns.length) { section.style.display = "none"; return; }
+  section.style.display = "block";
+  grid.innerHTML = savedRuns.map((run, idx) => {
+    const pillarsHtml = run.scores.map((s, i) => `
+      <div class="run-pillar-row">
+        <span class="run-pillar-name">${PILLAR_SHORTS[i]}</span>
+        <div class="run-pillar-track"><div class="run-pillar-fill" style="width:${s}%;background:${badgeColor(s)};"></div></div>
+        <span class="run-pillar-num" style="color:${badgeColor(s)};">${s}</span>
+      </div>`).join("");
+    return `
+      <div class="run-card" style="border-top:3px solid ${run.color};">
+        <button class="delete-run-btn" onclick="deleteRun(${idx})" title="Remove">✕</button>
+        <div class="run-card-header">
+          <span class="run-card-label">${run.label}</span>
+        </div>
+        <div class="run-card-tfi" style="color:${run.color};">${run.tfi}</div>
+        <div class="run-card-band" style="color:${run.color};">${run.band}</div>
+        ${pillarsHtml}
+      </div>`;
+  }).join("");
+}
+
+function deleteRun(idx) {
+  savedRuns.splice(idx, 1);
+  savedRuns.forEach((r, i) => { r.label = "Run " + (i + 1); });
+  renderRunsSection();
+  updateRailGhosts();
+  renderRailLegend();
+  document.getElementById("save-run-btn").disabled = false;
+  document.getElementById("save-confirm").textContent = "";
 }
 
 // ═══════════════════════════════════════════
@@ -1390,12 +1803,27 @@ function applyPreset(name) {
 document.addEventListener("DOMContentLoaded", () => {
   initCharts();
   bindControls();
+  initRailGauge();
+  initReveal();
 
   document.querySelectorAll(".preset-btn").forEach(btn => {
     btn.addEventListener("click", () => applyPreset(btn.dataset.preset));
   });
 
+  // Pre-compute preset TFIs for ghost needles
+  ["varoufakis", "skeptic", "centrist"].forEach(name => {
+    const p = PRESETS[name];
+    const scores = [
+      pillar1Score(p.p1_rent / 100),
+      pillar2Score(p.p2_dep / 100, p.p2_feudal),
+      pillar3Score(p.p3_thresh),
+      pillar4Score(p.p4_ugc / 100, p.p4_smb / 100)
+    ];
+    PRESET_TFIS[name] = compositeScore(scores, p.weights);
+  });
+
   updateAll();
+  updateRailGhosts();
 });
 </script>
 </body>
