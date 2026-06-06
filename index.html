@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Are We Leaving Capitalism? — A Techno-Feudalism Diagnostic</title>
+<title>Are We Leaving Capitalism? — A Techno-Feudalism Explorer</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root {
@@ -69,6 +69,29 @@ a { color: var(--blue); }
   border-left: 3px solid var(--border);
   padding-left: 14px;
 }
+.how-to-use {
+  background: #f0f4ff;
+  border: 2px solid var(--blue);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-top: 18px;
+  font-family: system-ui, sans-serif;
+}
+.how-to-use-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+.how-to-use ol {
+  margin-left: 20px;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: #222;
+}
+.how-to-use li { margin-bottom: 2px; }
 
 /* ── Section spacing ── */
 .section {
@@ -123,12 +146,23 @@ a { color: var(--blue); }
 }
 .weights-panel { }
 .weights-title {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  font-family: system-ui, sans-serif;
+  margin-bottom: 4px;
+}
+.weights-hint {
+  font-size: 0.8rem;
   color: var(--muted);
   font-family: system-ui, sans-serif;
-  margin-bottom: 12px;
+  font-style: italic;
+  margin-bottom: 14px;
+  line-height: 1.5;
+  padding: 8px 10px;
+  background: #fffbe8;
+  border-left: 3px solid var(--amber);
+  border-radius: 3px;
 }
 .weight-row {
   display: grid;
@@ -216,7 +250,7 @@ a { color: var(--blue); }
   margin-left: auto;
 }
 .score-badge::before {
-  content: "Signal";
+  content: "Score";
   font-weight: 400;
   opacity: 0.8;
   font-size: 0.72rem;
@@ -404,22 +438,31 @@ footer {
 <!-- ─── HEADER ─── -->
 <header class="site-header">
   <div class="container">
-    <div class="header-label">Interactive Data Essay · Economics</div>
+    <div class="header-label">Interactive Data Tool · Economics</div>
     <h1>Are We Leaving Capitalism?</h1>
-    <div class="header-sub">A diagnostic instrument for the techno-feudalism thesis</div>
+    <div class="header-sub">An explorer for a big, controversial idea</div>
     <p class="header-frame">
-      Yanis Varoufakis argues in <em>Technofeudalism</em> (2023) that capitalism's twin pillars — profit and markets — have been displaced by rent and platform fiefdoms. This tool lets you test that claim against real data. Move the controls. Watch the verdict change. The conclusion is yours to reach.
+      <strong>The big idea:</strong> What if capitalism is slowly turning into something like feudalism — where a handful of tech giants act like medieval landlords, charging everyone else "rent" just to do business online? Greek economist Yanis Varoufakis calls this <em>technofeudalism.</em> This tool lets you test that idea against real data. <em>You set the sliders. You reach the verdict.</em>
     </p>
+    <div class="how-to-use">
+      <div class="how-to-use-title">How to use this tool</div>
+      <ol>
+        <li><strong>Scroll through the four topics below.</strong> Each one is a clue about whether the economy looks more capitalist or feudal.</li>
+        <li><strong>Move the sliders</strong> in each section based on what <em>you</em> believe. Your score updates instantly.</li>
+        <li><strong>At the top, set how much each topic matters to you</strong> — drag the importance sliders and watch the dial change.</li>
+        <li><strong>Try a preset view</strong> (Varoufakis, The Skeptic, Centrist) to see how different starting beliefs lead to very different conclusions.</li>
+      </ol>
+    </div>
   </div>
 </header>
 
 <!-- ─── TFI COMPOSITE ─── -->
 <section class="section" id="tfi-section">
   <div class="container">
-    <div class="section-label">Composite Score</div>
+    <div class="section-label">Your Score</div>
     <h2>Techno-Feudalism Index (TFI)</h2>
     <p style="font-size:0.88rem;color:var(--muted);font-family:system-ui,sans-serif;margin-bottom:0;">
-      Set the weight you assign to each pillar. The index aggregates four empirical signals, 0–100. At default equal weights with real anchor data, the needle lands in the <strong>Contested</strong> zone — which is where the evidence genuinely sits.
+      This dial combines your answers from all four topics into one score. <strong>0 = clearly still capitalism. 100 = clearly techno-feudal.</strong> With equal weights and real data, the needle lands in the middle — the "Contested" zone — because serious experts genuinely disagree.
     </p>
 
     <div class="tfi-layout">
@@ -431,35 +474,36 @@ footer {
       </div>
 
       <div>
-        <div class="weights-title">Pillar weights (must sum to 100%)</div>
+        <div class="weights-title">How much does each topic matter to you?</div>
+        <div class="weights-hint">Drag any slider to give a topic more or less importance. The other three automatically adjust — they always add up to 100%.</div>
         <div class="weight-row">
-          <span class="weight-label">1. Rent over Profit</span>
+          <span class="weight-label">1. Who gets the money?</span>
           <input type="range" id="w1" min="0" max="100" value="25" step="5">
           <span class="weight-pct" id="w1-pct">25%</span>
           <span class="pillar-badge" id="p1-badge">—</span>
         </div>
         <div class="weight-row">
-          <span class="weight-label">2. Markets→Fiefdoms</span>
+          <span class="weight-label">2. Platform power</span>
           <input type="range" id="w2" min="0" max="100" value="25" step="5">
           <span class="weight-pct" id="w2-pct">25%</span>
           <span class="pillar-badge" id="p2-badge">—</span>
         </div>
         <div class="weight-row">
-          <span class="weight-label">3. Concentration</span>
+          <span class="weight-label">3. Too few companies?</span>
           <input type="range" id="w3" min="0" max="100" value="25" step="5">
           <span class="weight-pct" id="w3-pct">25%</span>
           <span class="pillar-badge" id="p3-badge">—</span>
         </div>
         <div class="weight-row">
-          <span class="weight-label">4. Serfs &amp; Vassals</span>
+          <span class="weight-label">4. Users &amp; sellers trapped?</span>
           <input type="range" id="w4" min="0" max="100" value="25" step="5">
           <span class="weight-pct" id="w4-pct">25%</span>
           <span class="pillar-badge" id="p4-badge">—</span>
         </div>
-        <div style="font-size:0.78rem;font-family:system-ui,sans-serif;color:var(--muted);margin-top:4px;" id="weight-sum-warn"></div>
+        <div style="display:none;" id="weight-sum-warn"></div>
 
         <div class="presets-row" style="margin-top:16px;">
-          <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);font-family:system-ui,sans-serif;width:100%;margin-bottom:4px;">Scenario presets</div>
+          <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);font-family:system-ui,sans-serif;width:100%;margin-bottom:4px;">Try a pre-built view →</div>
           <button class="preset-btn" data-preset="varoufakis">Varoufakis</button>
           <button class="preset-btn" data-preset="skeptic">The Skeptic</button>
           <button class="preset-btn" data-preset="centrist">Centrist</button>
@@ -474,20 +518,20 @@ footer {
 <!-- ─── PILLAR 1 ─── -->
 <section class="section" id="pillar1">
   <div class="container">
-    <div class="pillar-num">Pillar 1 of 4</div>
+    <div class="pillar-num">Topic 1 of 4</div>
     <div class="pillar-header">
-      <h2>Rent over Profit</h2>
+      <h2>Who Gets the Money?</h2>
       <span class="score-badge" id="p1-score-badge">—</span>
     </div>
 
     <div class="thesis-block">
       <div class="thesis-yes">
-        <h4>The feudalism case</h4>
-        Income is shifting from labor and productive capital toward rent extraction. The US labor share has fallen to its lowest level since records began in 1947. Corporate profit share has nearly doubled since 1982.
+        <h4>The feudalism argument</h4>
+        Workers are getting a smaller share of what they produce. In 1987, workers received about 68 cents out of every dollar of output. By 2025, that fell to just 54 cents. Meanwhile, big-company profits nearly doubled. Varoufakis says this shift toward profit — especially "rent" from monopoly power — looks a lot like feudalism.
       </div>
       <div class="thesis-no">
-        <h4>The skeptic's rebuttal</h4>
-        Labor-share decline has many causes: automation, globalization, union decline, and the rise of intangible capital. A declining labor share is consistent with capitalism — it does not require feudalism. Rent has always coexisted with profit.
+        <h4>The counter-argument</h4>
+        Workers' declining share has many explanations that have nothing to do with feudalism: automation, globalization, and the rise of tech companies that produce a lot with few employees. Profits going up doesn't automatically mean exploitation. Capitalism has always had winners and losers.
       </div>
     </div>
 
@@ -495,24 +539,24 @@ footer {
       <div class="chart-col">
         <canvas id="chart-p1"></canvas>
         <p class="source-line">
-          Sources: BLS Labor Productivity &amp; Costs (Q3 2025, via Fortune Jan 2026); Karabarbounis (2024), Journal of Economic Perspectives; KPMG / Diane Swonk (via Fortune Feb 2026). Real data points shown as filled circles; interpolated values as lighter lines. Vintage: data through 2025.
+          Sources: BLS Labor Productivity &amp; Costs (Q3 2025, via Fortune Jan 2026); Karabarbounis (2024), <em>Journal of Economic Perspectives</em>; KPMG / Diane Swonk (via Fortune Feb 2026). Solid dots = real measured data. Lines = estimated trend between measurements. Data through 2025.
         </p>
       </div>
       <div class="control-col">
         <div class="control-group">
           <label class="control-label" for="p1-rent">
-            How much of the capital-share gain is <em>rent</em> vs. productive return on intangible capital?
+            <strong>Your call — move this slider:</strong> How much of the growth in big-company profits do you think comes from <em>unfair advantages</em> (monopoly power, blocking competition) vs. <em>genuine innovation and hard work</em>?
           </label>
           <input type="range" id="p1-rent" min="0" max="100" value="50" step="5">
-          <div class="range-labels"><span>All productive return</span><span>All rent</span></div>
+          <div class="range-labels"><span>← All fair / earned</span><span>All unfair / extracted →</span></div>
           <div class="range-value" id="p1-rent-val">50%</div>
         </div>
         <div class="readout" id="p1-readout">
-          US labor share: <strong>53.8%</strong> (Q3 2025, record low since 1947 series began). Down from 67.8% in 1987 — a 14-point fall over 38 years. Corporate profit share: ~15.85% of GDP (2024), up from ~8% in 1982.
+          Workers' share of output hit <strong>53.8%</strong> in Q3 2025 — the lowest recorded since 1947. It was 67.8% in 1987. Big-company profits as % of GDP: ~16% in 2024, up from ~8% in 1982.
         </div>
         <div class="callout warning" style="margin-top:12px;">
-          <h4>The crux of the debate</h4>
-          This slider is where the entire argument turns. Varoufakis: the gains above normal profit rates are economic rent, extracted via market power. Mainstream economists: much of the gain reflects fair returns on intangible investment (brands, software, data infrastructure). Neither claim is directly falsifiable from share-of-GDP data alone.
+          <h4>The key question</h4>
+          This slider is where the whole argument lives. Varoufakis says excess profit is basically a tax on everyone else — like a lord taxing his peasants. Mainstream economists say it reflects fair returns on software, brands, and data. Neither side can fully prove their case with this data alone.
         </div>
       </div>
     </div>
@@ -522,20 +566,20 @@ footer {
 <!-- ─── PILLAR 2 ─── -->
 <section class="section" id="pillar2">
   <div class="container">
-    <div class="pillar-num">Pillar 2 of 4</div>
+    <div class="pillar-num">Topic 2 of 4</div>
     <div class="pillar-header">
-      <h2>Markets to Fiefdoms</h2>
+      <h2>Are Platforms Like Landlords?</h2>
       <span class="score-badge" id="p2-score-badge">—</span>
     </div>
 
     <div class="thesis-block">
       <div class="thesis-yes">
-        <h4>The feudalism case</h4>
-        Open markets replaced by walled platforms charging mandatory access tolls. App Store and Play take 30% of every transaction. Amazon's blended take-rate on third-party sellers runs ~50% when fees, ads, and logistics stack. A medieval lord taxing the miller at 30% is structurally identical.
+        <h4>The feudalism argument</h4>
+        To sell anything online today, you almost have to go through Amazon, Apple, or Google — and they take 30–50% of every sale, not for making your product, but just for letting you use their "marketplace." A medieval lord who charged the village baker to use his oven worked the same way. That's rent, not fair competition.
       </div>
       <div class="thesis-no">
-        <h4>The skeptic's rebuttal</h4>
-        Platforms still compete with each other. Apple competes with Android. Amazon competes with Shopify, Walmart, direct-to-consumer. High take-rates reflect the value of customer access, trust infrastructure, and logistics — not extraction from captive vassals. Exit is possible; switching costs, not feudal bonds.
+        <h4>The counter-argument</h4>
+        These platforms still compete with each other. Sellers can also use Shopify, Walmart, or sell directly. The fees are high because they provide real value: trusted customers, secure payments, and fast shipping. Sellers <em>chose</em> to be there — nobody forced them. High fees aren't the same as captivity.
       </div>
     </div>
 
@@ -543,28 +587,28 @@ footer {
       <div class="chart-col">
         <canvas id="chart-p2"></canvas>
         <p class="source-line">
-          App Store / Google Play: standard 30% commission (15% for small developers &amp; subscriptions after year 1). Amazon blended take-rate: estimate 45–51% (Varoufakis cites ~51%; marketplace-fee studies: high 40s–50%). Open e-commerce (Shopify + payment): ~3–5%. Sources: Apple Developer docs; Amazon seller fee schedules; California DSA review of Varoufakis. Label: <em>estimate</em> for Amazon figure.
+          App Store / Google Play: 30% standard commission (15% for small developers). Amazon blended take-rate: ~45–51% estimated when you add fees, ads, and shipping. Open e-commerce (Shopify + payment): ~3–5%. Sources: Apple Developer docs; Amazon Seller Central fee schedules; California DSA review of Varoufakis. Amazon disputes the ~50% figure.
         </p>
       </div>
       <div class="control-col">
         <div class="control-group">
           <label class="control-label" for="p2-dep">
-            What share of your (or a typical small business's) sales flows through platforms you don't control?
+            <strong>Your call — move this slider:</strong> What percentage of small businesses depend so heavily on big platforms (Amazon, Google, Meta) that they <em>basically can't survive without them</em>?
           </label>
           <input type="range" id="p2-dep" min="0" max="100" value="60" step="5">
-          <div class="range-labels"><span>None — direct</span><span>All — platform-captive</span></div>
+          <div class="range-labels"><span>← Very few — they have real options</span><span>Almost all — no real choice →</span></div>
           <div class="range-value" id="p2-dep-val">60%</div>
         </div>
         <div class="control-group">
-          <label class="control-label">How do you read platform take-rates?</label>
+          <label class="control-label"><strong>Your call — click one:</strong> How do you read those 30–50% platform fees?</label>
           <div class="toggle-group">
-            <button class="toggle-btn active" id="p2-service-btn" onclick="setFraming(false)">Competitive price for a service</button>
-            <button class="toggle-btn" id="p2-feudal-btn" onclick="setFraming(true)">Feudal rent extraction</button>
+            <button class="toggle-btn active" id="p2-service-btn" onclick="setFraming(false)">Fair price for a useful service</button>
+            <button class="toggle-btn" id="p2-feudal-btn" onclick="setFraming(true)">Unfair "tollbooth" rent</button>
           </div>
-          <div class="range-value" id="p2-framing-label" style="margin-top:6px;color:var(--muted);">Framing: service pricing</div>
+          <div class="range-value" id="p2-framing-label" style="margin-top:6px;color:var(--muted);">Your view: fair service pricing</div>
         </div>
         <div class="readout">
-          Platform take-rate vs. open e-commerce: <strong>10× to 17×</strong> higher. The question is whether that premium reflects genuine value creation or captive-market extraction — and the answer determines whether this chart is evidence of feudalism or efficient intermediation.
+          Platform fees vs. selling on your own: <strong>10× to 17× higher.</strong> Is that because platforms are genuinely worth that much to sellers? Or because sellers have no real choice? Your answer to that question completely changes what the chart means.
         </div>
       </div>
     </div>
@@ -574,20 +618,20 @@ footer {
 <!-- ─── PILLAR 3 ─── -->
 <section class="section" id="pillar3">
   <div class="container">
-    <div class="pillar-num">Pillar 3 of 4</div>
+    <div class="pillar-num">Topic 3 of 4</div>
     <div class="pillar-header">
-      <h2>Concentration of Cloud Capital</h2>
+      <h2>Are a Few Companies Too Dominant?</h2>
       <span class="score-badge" id="p3-score-badge">—</span>
     </div>
 
     <div class="thesis-block">
       <div class="thesis-yes">
-        <h4>The feudalism case</h4>
-        The top-10 S&amp;P 500 companies now hold ~39% of the index's market cap — higher than the dot-com peak of 27%. The Magnificent 7 generate ~70% of the S&amp;P 500's economic profit. Three firms (AWS, Azure, GCP) control ~65% of global cloud infrastructure. This is the "cloud capital" Varoufakis identifies as the new means of production.
+        <h4>The feudalism argument</h4>
+        The top 10 companies in the S&amp;P 500 now own ~39% of the entire stock market's value — higher than even the dot-com bubble peak. Just seven companies (the "Magnificent 7") generate about 70% of all S&amp;P 500 economic profit. Varoufakis says whoever controls this digital infrastructure controls the economy the way feudal lords controlled the land.
       </div>
       <div class="thesis-no">
-        <h4>The skeptic's rebuttal</h4>
-        Concentration is historically cyclical. The railroads in 1900, the Nifty Fifty in the 1960s–70s, the dot-com era — all resolved without feudalism. Today's top-10 P/E (~31) is elevated but below the 2000 peak (~43). Earnings justify much of the valuation; this is monopoly capitalism, not feudalism.
+        <h4>The counter-argument</h4>
+        History is full of "too big" moments — railroads in 1900, oil companies in the 1920s, conglomerates in the 1970s. They all faded or got regulated. Today's giants have strong earnings that partly justify their size. Concentration doesn't automatically mean feudalism — it might just be monopoly capitalism (which is different and fixable).
       </div>
     </div>
 
@@ -595,24 +639,24 @@ footer {
       <div class="chart-col">
         <canvas id="chart-p3"></canvas>
         <p class="source-line">
-          Sources: Goldman Sachs; Columbia Threadneedle; AFM&amp;M; Motley Fool; FinancialContent. Top-10 share 2026: ~38–40% (early 2026). Dot-com peak 2000: ~27%. Top-10 P/E ~31 vs. ~21 for rest of index (vs. 43 vs. 21 in 2000). Vintage: early 2026.
+          Sources: Goldman Sachs; Columbia Threadneedle; AFM&amp;M; Motley Fool. Top-10 S&amp;P 500 share in early 2026: ~38–40%. Dot-com peak in 2000: ~27%. The dashed line shows <em>your</em> custom "too concentrated" threshold — drag the slider to set it.
         </p>
       </div>
       <div class="control-col">
         <div class="control-group">
           <label class="control-label" for="p3-thresh">
-            What top-10 market-cap concentration level do you consider "systemically feudal"?
+            <strong>Your call — move this slider:</strong> Set your own limit. At what percentage of the stock market would you say just 10 companies are <em>dangerously dominant</em>?
           </label>
           <input type="range" id="p3-thresh" min="15" max="60" value="40" step="1">
-          <div class="range-labels"><span>15% (tight)</span><span>60% (very high bar)</span></div>
-          <div class="range-value" id="p3-thresh-val">Threshold: 40% · Actual: 39% → <span id="p3-vs">just below</span></div>
+          <div class="range-labels"><span>← 15% (very strict)</span><span>60% (very lenient) →</span></div>
+          <div class="range-value" id="p3-thresh-val">Your limit: 40% · Actual today: 39% → <span id="p3-vs">just below</span></div>
         </div>
         <div class="callout skeptic">
-          <h4>Historical concentration episodes</h4>
-          <strong>1900s US railroads:</strong> top carriers controlled ~70% of freight. Resolved via regulation (ICC), not systemic collapse. <strong>1960s Nifty Fifty:</strong> 50 stocks at P/Es of 40–90×. Corrected 1973–74. <strong>2000 dot-com:</strong> top-10 at 27% of S&amp;P; P/E 43×. Today: 39%, P/E 31×. Elevated — but with earnings that partly justify the premium.
+          <h4>It has happened before</h4>
+          <strong>1900s railroads:</strong> top carriers controlled ~70% of US freight. Broken up by government regulation. <strong>1970s Nifty Fifty:</strong> 50 stocks at 40–90× earnings. Crashed 1973–74. <strong>Dot-com 2000:</strong> top-10 at 27% of S&amp;P, P/E ratio of 43×. Today: 39%, P/E of 31×. Elevated — but earnings are more solid than 2000.
         </div>
         <div class="readout" style="margin-top:12px;">
-          Mag-7 economic profit share: <strong>~70% of S&amp;P 500</strong> (Russell Investments via AFM&amp;M). Top-10 earnings share: ~31% of total index. The concentration in profits exceeds the concentration in market cap — which is precisely Varoufakis's point about monopolistic rent, and the skeptic's point about genuine productivity gains.
+          The Magnificent 7 earn <strong>~70% of all economic profit</strong> in the S&amp;P 500 (Russell Investments). The concentration in profits is even higher than their share of the stock market — that's Varoufakis's main point. Skeptics call it "just being really productive."
         </div>
       </div>
     </div>
@@ -622,24 +666,24 @@ footer {
 <!-- ─── PILLAR 4 ─── -->
 <section class="section" id="pillar4">
   <div class="container">
-    <div class="pillar-num">Pillar 4 of 4</div>
+    <div class="pillar-num">Topic 4 of 4</div>
     <div class="pillar-header">
-      <h2>Serfs &amp; Vassals</h2>
+      <h2>Are Users and Small Businesses Trapped?</h2>
       <span class="score-badge" id="p4-score-badge">—</span>
     </div>
 
     <div class="uncertainty-banner">
-      <strong>Weakest evidence.</strong> This pillar is mostly assumption — you supply the numbers. There is no audited, cross-jurisdictional dataset on the share of platform value derived from user-generated content or small-firm dependence. Treat this pillar as a sensitivity test, not empirical measurement. The teaching point: the rhetorically most powerful pillar is the least empirically grounded.
+      <strong>Heads up — this section is mostly your opinion, not hard facts.</strong> There's no reliable public dataset that measures exactly how "trapped" users or small businesses are. You're supplying the numbers. The point is to test your own assumptions — and see how much the score changes when you do.
     </div>
 
     <div class="thesis-block">
       <div class="thesis-yes">
-        <h4>The feudalism case</h4>
-        Users generate the data and content that makes platforms valuable without compensation — structurally identical to unpaid serf labor. Small firms are so dependent on Amazon, Meta, or Google for demand that they cannot operate independently: they are "cloud vassals," paying tribute to survive.
+        <h4>The feudalism argument</h4>
+        Every photo you post, every review you write, every click you make — that's free work making platforms worth billions. Varoufakis compares users to medieval serfs who farm the lord's land without pay. Small businesses that rely entirely on Amazon or Google for their customers are "cloud vassals" — paying tribute just to survive.
       </div>
       <div class="thesis-no">
-        <h4>The skeptic's rebuttal</h4>
-        Users receive services in exchange — search, social graphs, logistics networks — which is a bilateral transaction, not extraction. The "unpaid labor" framing is ideological, not accounting. Small firms chose platform distribution because it was more efficient, not because they were coerced. They retain the option to exit.
+        <h4>The counter-argument</h4>
+        You get something real in return: free search, free social networks, free maps, free email. That's a trade, not exploitation. And small businesses chose platforms because they worked — nobody forced them. Building a website and advertising elsewhere was always an option. Choosing convenience isn't the same as being a serf.
       </div>
     </div>
 
@@ -647,23 +691,23 @@ footer {
       <div class="control-col" style="grid-column: 1 / -1; max-width: 520px;">
         <div class="control-group">
           <label class="control-label" for="p4-ugc">
-            <em>[Modeled assumption]</em> What % of platform value do you believe is created by unpaid user data and content?
+            <strong>Your estimate — move this slider:</strong> What percentage of a platform's value comes from <em>free content made by regular users</em> — their posts, photos, reviews, and data — rather than from what the platform itself built?
           </label>
           <input type="range" id="p4-ugc" min="0" max="100" value="50" step="5">
-          <div class="range-labels"><span>0% — platforms create their own value</span><span>100% — users create all of it</span></div>
+          <div class="range-labels"><span>← 0% — platform creates all its own value</span><span>100% — users create all of it →</span></div>
           <div class="range-value" id="p4-ugc-val">50%</div>
         </div>
         <div class="control-group">
           <label class="control-label" for="p4-smb">
-            <em>[Modeled assumption]</em> What % of small firms are so platform-dependent they cannot viably operate without 1–2 platforms?
+            <strong>Your estimate — move this slider:</strong> What percentage of small businesses are so locked in to 1–2 big platforms that they <em>couldn't realistically survive without them</em>?
           </label>
           <input type="range" id="p4-smb" min="0" max="100" value="50" step="5">
-          <div class="range-labels"><span>0% — firms have real alternatives</span><span>100% — fully captive</span></div>
+          <div class="range-labels"><span>← 0% — they have real alternatives</span><span>100% — completely locked in →</span></div>
           <div class="range-value" id="p4-smb-val">50%</div>
         </div>
         <div class="callout warning">
-          <h4>Sensitivity test</h4>
-          Try cranking Pillar 4's weight in the TFI panel to 60–70% and watch the composite shift. The TFI is most sensitive to this pillar precisely because it is most assumption-driven. A good instrument should flag that as a reason for caution, not confidence.
+          <h4>Try this experiment</h4>
+          Go back to the top and drag the "Users &amp; sellers trapped?" importance slider all the way to 60–70%. Watch the overall score jump. This topic is the most assumption-driven one — and it moves the score the most. A good tool should make you suspicious of that.
         </div>
       </div>
     </div>
@@ -673,39 +717,39 @@ footer {
 <!-- ─── WATCHLIST ─── -->
 <section class="section" id="watchlist">
   <div class="container">
-    <div class="section-label">Forward Indicators</div>
-    <h2>What Would Change the Diagnosis</h2>
-    <p style="font-size:0.87rem;color:var(--muted);font-family:system-ui,sans-serif;">The metrics that, if they moved, would genuinely shift the reading — in either direction.</p>
+    <div class="section-label">What to Watch</div>
+    <h2>What Would Change the Answer?</h2>
+    <p style="font-size:0.87rem;color:var(--muted);font-family:system-ui,sans-serif;">These are the real-world signals that would genuinely move the needle — in either direction. Watch these in the news.</p>
     <div class="watchlist-grid">
       <div class="watch-card">
-        <div class="watch-indicator">Labor share trend</div>
-        <div class="watch-signal">Currently at record low (53.8%, Q3 2025). Post-pandemic labor-share gains partially reversed.</div>
-        <div class="watch-yes">→ Feudal: continued record lows; further decline to &lt;50%</div>
-        <div class="watch-no">→ Capitalism: mean-reversion to 58–60% range</div>
+        <div class="watch-indicator">Workers' share of income</div>
+        <div class="watch-signal">At a record low of 53.8% (Q3 2025). Post-pandemic gains have largely reversed.</div>
+        <div class="watch-yes">→ More feudal: drops below 50%</div>
+        <div class="watch-no">→ More capitalist: recovers to 58–60%</div>
       </div>
       <div class="watch-card">
-        <div class="watch-indicator">Platform take-rates</div>
-        <div class="watch-signal">App Store ~30%; Amazon blended ~50%. EU Digital Markets Act now in force.</div>
-        <div class="watch-yes">→ Feudal: take-rates rise; DMA enforcement fails</div>
-        <div class="watch-no">→ Capitalism: take-rates fall under regulatory or competitive pressure</div>
+        <div class="watch-indicator">Platform fees</div>
+        <div class="watch-signal">App Store ~30%; Amazon blended ~50%. The EU's Digital Markets Act is now in force.</div>
+        <div class="watch-yes">→ More feudal: fees keep rising; regulations fail</div>
+        <div class="watch-no">→ More capitalist: fees fall under competition or regulation</div>
       </div>
       <div class="watch-card">
-        <div class="watch-indicator">S&P 500 concentration</div>
-        <div class="watch-signal">Top-10 at ~39% (early 2026). Highest since records. Accelerating post-2020.</div>
-        <div class="watch-yes">→ Feudal: top-10 breaches 45–50%; no broadening</div>
-        <div class="watch-no">→ Capitalism: new IPO wave dilutes index; top-10 share falls back to 25–30%</div>
+        <div class="watch-indicator">Stock market concentration</div>
+        <div class="watch-signal">Top-10 companies hold ~39% of the S&amp;P 500 (early 2026). Highest ever recorded.</div>
+        <div class="watch-yes">→ More feudal: top-10 hits 45–50%; no new competitors</div>
+        <div class="watch-no">→ More capitalist: new companies emerge; share falls to 25–30%</div>
       </div>
       <div class="watch-card">
-        <div class="watch-indicator">Interoperability &amp; switching</div>
-        <div class="watch-signal">DMA mandates some interoperability (EU). US antitrust suits ongoing against Apple, Google, Amazon.</div>
-        <div class="watch-yes">→ Feudal: mandates blocked or unenforced; lock-in deepens</div>
-        <div class="watch-no">→ Capitalism: real portability emerges; switching costs fall</div>
+        <div class="watch-indicator">Can you switch platforms?</div>
+        <div class="watch-signal">EU law now requires some interoperability. US antitrust cases ongoing vs. Apple, Google, Amazon.</div>
+        <div class="watch-yes">→ More feudal: rules get blocked; lock-in gets worse</div>
+        <div class="watch-no">→ More capitalist: real alternatives emerge; easy to switch</div>
       </div>
       <div class="watch-card">
-        <div class="watch-indicator">Rentier income share</div>
-        <div class="watch-signal">Flows to capital (dividends, buybacks, platform fees) as % of national income trending up since 1980s.</div>
-        <div class="watch-yes">→ Feudal: rentier share exceeds labor share in national income accounting</div>
-        <div class="watch-no">→ Capitalism: profit margins compress; labor share stabilizes</div>
+        <div class="watch-indicator">Rent vs. wages nationally</div>
+        <div class="watch-signal">Money flowing to capital owners (dividends, buybacks, platform fees) as a % of national income has risen steadily since the 1980s.</div>
+        <div class="watch-yes">→ More feudal: capital income surpasses labor income</div>
+        <div class="watch-no">→ More capitalist: profit margins shrink; wages recover</div>
       </div>
     </div>
   </div>
@@ -714,43 +758,45 @@ footer {
 <!-- ─── SOURCES ─── -->
 <section class="section" id="sources">
   <div class="container">
-    <div class="section-label">Methodology</div>
-    <h2>Sources &amp; Caveats</h2>
+    <div class="section-label">Behind the Numbers</div>
+    <h2>Sources &amp; Limitations</h2>
 
-    <h3 style="margin-top:16px;">Data sources</h3>
+    <h3 style="margin-top:16px;">Where the data comes from</h3>
     <ul class="sources-list" style="margin-left:18px;">
-      <li><strong>Labor share (BLS series):</strong> US Bureau of Labor Statistics, Labor Productivity &amp; Costs, nonfarm business sector. Q3 2025 value: 53.8% (prior quarter 54.6%; 2020s avg ~55.6%). Via Fortune, Jan 2026. Peak: 67.8% in 1987 (Karabarbounis 2024, <em>Journal of Economic Perspectives</em>).</li>
-      <li><strong>Corporate profit / compensation shares:</strong> KPMG (Diane Swonk) via Fortune, Feb 2026. Compensation: ~66.6% (1982) → ~61.9% (2024). Profits: ~8% (1982) → ~15.85% (2024) as share of GDP. Note: this uses a different base (national income) than the BLS nonfarm series — the two measures are not directly comparable.</li>
-      <li><strong>Profit share historical range:</strong> PGIM Fixed Income, "Evolution of US Corporate Profits." ~16% (1950–70); ~17% through 2000; ~22% post-GFC. This appears to measure corporate profits as a share of corporate sector value-added, which differs from BEA profit/GDP; treat as directional.</li>
-      <li><strong>Fortune 500 profits:</strong> Fortune 500 annual list. Record $1.87 trillion in 2024.</li>
-      <li><strong>Platform take-rates:</strong> Apple Developer Program License Agreement; Amazon Seller Central fee schedules (FBA + referral + ads blended). Amazon figure (~50%) is an estimate with range 45–51%; labeled accordingly. California DSA review of Varoufakis (2024).</li>
-      <li><strong>S&P 500 concentration:</strong> Goldman Sachs (top-10 P/E, market cap share); Columbia Threadneedle; AFM&amp;M. Top-10 share in early 2026: ~38–40%. Dot-com peak 2000: ~27%. 2020 figure: ~22%. Mag-7 economic profit share (~70%): Russell Investments via AFM&amp;M.</li>
+      <li><strong>Workers' share of output (BLS series):</strong> US Bureau of Labor Statistics, nonfarm business sector. Q3 2025 value: 53.8% (prior quarter: 54.6%). Via Fortune, Jan 2026. Peak: 67.8% in 1987 (Karabarbounis 2024, <em>Journal of Economic Perspectives</em>).</li>
+      <li><strong>Corporate profits:</strong> KPMG (Diane Swonk) via Fortune, Feb 2026. Profits as % of GDP: ~8% in 1982 → ~15.85% in 2024. Note: different measurement methods produce different numbers — treat trends as directional.</li>
+      <li><strong>Platform take-rates:</strong> Apple Developer Program License Agreement; Amazon Seller Central fee schedules (FBA + referral + ads blended). Amazon's ~50% figure is an estimate (range 45–51%); Amazon disputes this characterization.</li>
+      <li><strong>S&amp;P 500 concentration:</strong> Goldman Sachs; Columbia Threadneedle; AFM&amp;M. Top-10 share in early 2026: ~38–40%. Dot-com peak 2000: ~27%. Mag-7 economic profit share (~70%): Russell Investments via AFM&amp;M.</li>
     </ul>
 
-    <h3 style="margin-top:20px;">What is measured vs. modeled</h3>
+    <h3 style="margin-top:20px;">What's real data vs. what's your opinion</h3>
     <ul class="sources-list caveats-list" style="margin-left:18px;">
-      <li><strong>Measured (real data):</strong> Labor share trend; corporate profit share; platform take-rates; S&P 500 concentration ratios. Shown with filled-circle markers on charts.</li>
-      <li><strong>Interpolated:</strong> Annual data between known anchor points on Pillar 1 and 3 charts. Shown with lighter lines. Interpolation is linear; actual data varies. Treat as illustrative, not precise.</li>
-      <li><strong>Modeled / assumption-driven:</strong> All Pillar 4 inputs; the "rent vs. productive return" fraction on Pillar 1; the "framing" toggle on Pillar 2; the "feudal threshold" on Pillar 3. These represent interpretive choices, not empirical findings.</li>
+      <li><strong>Real measured data:</strong> Workers' income share, corporate profits, platform fees, stock market concentration. Shown as solid dots on charts.</li>
+      <li><strong>Estimated trend lines:</strong> Values between measured data points. Shown as lighter lines. Treat as approximate — they connect real points, they don't add new information.</li>
+      <li><strong>Your opinion:</strong> All of Topic 4 (users &amp; sellers trapped), the "unfair vs. fair profit" slider (Topic 1), the "fair fee vs. toll" toggle (Topic 2), and the concentration threshold (Topic 3). These are your assumptions — not established facts.</li>
     </ul>
 
-    <h3 style="margin-top:20px;">Important limitations</h3>
+    <h3 style="margin-top:20px;">Important warnings</h3>
     <ul class="sources-list caveats-list" style="margin-left:18px;">
-      <li>The Techno-Feudalism Index is a <strong>diagnostic heuristic</strong>, not a rigorous economic index. The scoring functions are designed to be transparent and adjustable, not to assert a single true value.</li>
-      <li>The "labor share decline has many causes" caveat is real and important: automation and intangible capital investment can reduce labor share within competitive capitalism. The slider makes the user own their causal assumption.</li>
-      <li>US data predominates. The labor-share decline is documented across OECD economies (IMF, 2017; ILO, various) but with significant cross-country variation. EU and Global series on the chart are illustrative only.</li>
-      <li>The Amazon take-rate figure is a blended estimate contested by Amazon. The company disputes the "~50%" characterization. The range 45–51% reflects independent analysis of fee schedules.</li>
+      <li>The Techno-Feudalism Index is a <strong>thinking tool, not a scientific measurement.</strong> It's designed to make you aware of your own assumptions — not to give you a "correct" answer.</li>
+      <li>All data is US-focused. Other countries show similar trends but with significant differences.</li>
+      <li>Workers' income share can fall for many reasons that aren't about exploitation: automation, more part-time work, the rise of asset-light tech companies that produce a lot with few employees.</li>
+      <li>The book this tool is based on: Yanis Varoufakis, <em>Technofeudalism: What Killed Capitalism</em> (2023). The counter-arguments draw on mainstream economic critiques of that thesis.</li>
     </ul>
   </div>
 </section>
 
 <footer>
   <div class="container">
-    All data hardcoded at time of publication (vintage: mid-2026). No external API calls; no real-time data. This instrument is for analytical and educational purposes. It does not constitute investment or policy advice. Built as a single self-contained HTML file.
+    Data frozen at time of publication (vintage: mid-2026). No live data feeds. For educational use only — not investment or policy advice. Built as a single HTML file with no external dependencies at runtime.
   </div>
 </footer>
 
 <script>
+// ═══════════════════════════════════════════
+// DATA LAYER
+// ═══════════════════════════════════════════
+
 function interpolateSeries(anchors) {
   const result = [];
   for (let i = 0; i < anchors.length - 1; i++) {
@@ -758,12 +804,17 @@ function interpolateSeries(anchors) {
     const span = b.year - a.year;
     for (let y = a.year; y < b.year; y++) {
       const t = (y - a.year) / span;
-      result.push({ year: y, value: parseFloat((a.value + t * (b.value - a.value)).toFixed(2)), type: (y === a.year) ? a.type : "interpolated" });
+      result.push({
+        year: y,
+        value: parseFloat((a.value + t * (b.value - a.value)).toFixed(2)),
+        type: (y === a.year) ? a.type : "interpolated"
+      });
     }
   }
   result.push({ ...anchors[anchors.length - 1] });
   return result;
 }
+
 const LABOR_ANCHORS = [
   { year: 1947, value: 64.5, type: "interpolated" },
   { year: 1960, value: 66.0, type: "interpolated" },
@@ -783,6 +834,7 @@ const LABOR_ANCHORS = [
   { year: 2024, value: 54.6, type: "measured" },
   { year: 2025, value: 53.8, type: "measured" }
 ];
+
 const PROFIT_ANCHORS = [
   { year: 1947, value: 12.5, type: "interpolated" },
   { year: 1950, value: 14.8, type: "interpolated" },
@@ -806,10 +858,12 @@ const PROFIT_ANCHORS = [
   { year: 2024, value: 15.85, type: "measured" },
   { year: 2025, value: 15.5, type: "interpolated" }
 ];
+
 const laborSeries = interpolateSeries(LABOR_ANCHORS);
 const profitSeries = interpolateSeries(PROFIT_ANCHORS);
+
 const CONCENTRATION_DATA = [
-  { year: 2000, value: 27, type: "measured" },
+  { year: 2000, value: 27, type: "measured", note: "dot-com peak" },
   { year: 2002, value: 21, type: "interpolated" },
   { year: 2005, value: 19, type: "interpolated" },
   { year: 2008, value: 20, type: "interpolated" },
@@ -824,11 +878,39 @@ const CONCENTRATION_DATA = [
   { year: 2024, value: 36, type: "interpolated" },
   { year: 2026, value: 39, type: "measured" }
 ];
+
+const PLATFORM_DATA = {
+  labels: ["Open e-commerce\n(Shopify + payment)", "App Store / Google Play\n(standard rate)", "Amazon (blended est.)\n(fees + ads + FBA)"],
+  values: [4, 30, 50],
+  colors: ["#1e6b3e", "#c17f24", "#C0392B"],
+  types: ["measured", "measured", "estimate"],
+  notes: ["~3–5% blended", "30% (15% small dev)", "~45–51% estimate"]
+};
+
+// ═══════════════════════════════════════════
+// TFI ENGINE
+// ═══════════════════════════════════════════
+
 function clamp(lo, hi, v) { return Math.max(lo, Math.min(hi, v)); }
-function pillar1Score(rentFraction) { return clamp(0, 100, Math.round(15 + rentFraction * 80)); }
-function pillar2Score(dependency, isFeudal) { const ff = isFeudal ? 1.3 : 0.85; return clamp(0, 100, Math.round(5 + dependency * 70 * ff)); }
-function pillar3Score(threshold) { return clamp(0, 100, Math.round((39 / threshold) * 60)); }
-function pillar4Score(ugcShare, smbDep) { return clamp(0, 100, Math.round(5 + ugcShare * 45 + smbDep * 40)); }
+
+function pillar1Score(rentFraction) {
+  return clamp(0, 100, Math.round(15 + rentFraction * 80));
+}
+
+function pillar2Score(dependency, isFeudal) {
+  const ff = isFeudal ? 1.3 : 0.85;
+  return clamp(0, 100, Math.round(5 + dependency * 70 * ff));
+}
+
+function pillar3Score(threshold) {
+  const actual = 39;
+  return clamp(0, 100, Math.round((actual / threshold) * 60));
+}
+
+function pillar4Score(ugcShare, smbDep) {
+  return clamp(0, 100, Math.round(5 + ugcShare * 45 + smbDep * 40));
+}
+
 function compositeScore(scores, weights) {
   const totalW = weights.reduce((a, b) => a + b, 0);
   if (totalW === 0) return 0;
@@ -836,145 +918,483 @@ function compositeScore(scores, weights) {
   for (let i = 0; i < 4; i++) sum += scores[i] * weights[i];
   return Math.round(sum / totalW);
 }
+
 function bandInfo(tfi) {
   if (tfi < 40) return { band: "Capitalism (concentrated)", color: "#1a3a5c", verdict: "Under your weighting, the data reads as concentrated but recognisable capitalism — rent exists, but has not displaced markets or profit as the organising logic." };
   if (tfi < 65) return { band: "Contested / Mutation", color: "#c17f24", verdict: "Under your weighting, the data reads as a rent-heavy mutation of capitalism. The system retains capitalist mechanics but shows structural stresses consistent with Varoufakis's diagnosis. Serious economists disagree on interpretation." };
   return { band: "Techno-Feudal", color: "#C0392B", verdict: "Under your weighting and assumptions, the data is consistent with Varoufakis's claim that rent and fiefdom now dominate profit and markets. Note what assumptions are required to reach this reading." };
 }
-function badgeColor(score) { if (score < 40) return "#1a3a5c"; if (score < 65) return "#c17f24"; return "#C0392B"; }
-const state = { weights: [25, 25, 25, 25], p1_rent: 50, p2_dep: 60, p2_feudal: false, p3_thresh: 40, p4_ugc: 50, p4_smb: 50 };
-function tfiToPoint(cx, cy, r, tfi) { const theta = (180 - tfi * 1.8) * Math.PI / 180; return { x: cx + r * Math.cos(theta), y: cy - r * Math.sin(theta) }; }
+
+function badgeColor(score) {
+  if (score < 40) return "#1a3a5c";
+  if (score < 65) return "#c17f24";
+  return "#C0392B";
+}
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+
+const state = {
+  weights: [25, 25, 25, 25],
+  p1_rent: 50,
+  p2_dep: 60,
+  p2_feudal: false,
+  p3_thresh: 40,
+  p4_ugc: 50,
+  p4_smb: 50
+};
+
+// ═══════════════════════════════════════════
+// GAUGE
+// ═══════════════════════════════════════════
+
+function tfiToPoint(cx, cy, r, tfi) {
+  const theta = (180 - tfi * 1.8) * Math.PI / 180;
+  return { x: cx + r * Math.cos(theta), y: cy - r * Math.sin(theta) };
+}
+
 function arcPath(cx, cy, r, tfi1, tfi2) {
-  const p1 = tfiToPoint(cx, cy, r, tfi1), p2 = tfiToPoint(cx, cy, r, tfi2);
-  const large = (tfi2 - tfi1) * 1.8 > 180 ? 1 : 0;
+  const p1 = tfiToPoint(cx, cy, r, tfi1);
+  const p2 = tfiToPoint(cx, cy, r, tfi2);
+  const span = (tfi2 - tfi1) * 1.8;
+  const large = span > 180 ? 1 : 0;
   return `M ${p1.x.toFixed(2)} ${p1.y.toFixed(2)} A ${r} ${r} 0 ${large} 0 ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
 }
+
 function drawGauge(tfi) {
   const svg = document.getElementById("gauge-svg");
   const cx = 140, cy = 155, r = 115, sw = 22;
-  let html = `<path d="${arcPath(cx,cy,r,0,100)}" fill="none" stroke="#e0e0e0" stroke-width="${sw}" stroke-linecap="butt"/>`;
-  [{from:0,to:40,color:"#d0dcea"},{from:40,to:65,color:"#f3dfa8"},{from:65,to:100,color:"#f0c4be"}].forEach(z => {
-    html += `<path d="${arcPath(cx,cy,r,z.from,z.to)}" fill="none" stroke="${z.color}" stroke-width="${sw}" stroke-linecap="butt"/>`;
+  const zones = [
+    { from: 0, to: 40, color: "#d0dcea", label: "Capitalism" },
+    { from: 40, to: 65, color: "#f3dfa8", label: "Contested" },
+    { from: 65, to: 100, color: "#f0c4be", label: "Techno-Feudal" }
+  ];
+
+  let html = "";
+
+  html += `<path d="${arcPath(cx, cy, r, 0, 100)}" fill="none" stroke="#e0e0e0" stroke-width="${sw}" stroke-linecap="butt"/>`;
+
+  zones.forEach(z => {
+    html += `<path d="${arcPath(cx, cy, r, z.from, z.to)}" fill="none" stroke="${z.color}" stroke-width="${sw}" stroke-linecap="butt"/>`;
   });
-  [{tfi:20,label:"Capitalism"},{tfi:52,label:"Contested"},{tfi:82,label:"Feudal"}].forEach(zl => {
-    const pt = tfiToPoint(cx,cy,r+20,zl.tfi);
-    html += `<text x="${pt.x.toFixed(1)}" y="${pt.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="system-ui,sans-serif" fill="#888" font-weight="600">${zl.label}</text>`;
+
+  const zoneLabels = [
+    { tfi: 20, label: "Capitalism" },
+    { tfi: 52, label: "Contested" },
+    { tfi: 82, label: "Feudal" }
+  ];
+  zoneLabels.forEach(zl => {
+    const pt2 = tfiToPoint(cx, cy, r + 20, zl.tfi);
+    html += `<text x="${pt2.x.toFixed(1)}" y="${pt2.y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="system-ui,sans-serif" fill="#888" font-weight="600">${zl.label}</text>`;
   });
+
   for (let t = 0; t <= 100; t += 10) {
-    const inner = tfiToPoint(cx,cy,r-sw/2-3,t), outer = tfiToPoint(cx,cy,r+sw/2+3,t);
+    const inner = tfiToPoint(cx, cy, r - sw / 2 - 3, t);
+    const outer = tfiToPoint(cx, cy, r + sw / 2 + 3, t);
     html += `<line x1="${inner.x.toFixed(1)}" y1="${inner.y.toFixed(1)}" x2="${outer.x.toFixed(1)}" y2="${outer.y.toFixed(1)}" stroke="#bbb" stroke-width="1"/>`;
   }
-  const tip = tfiToPoint(cx,cy,r-4,tfi), base = tfiToPoint(cx,cy,-18,tfi), left = tfiToPoint(cx,cy,8,tfi-4), right = tfiToPoint(cx,cy,8,tfi+4);
-  html += `<polygon points="${tip.x.toFixed(1)},${tip.y.toFixed(1)} ${left.x.toFixed(1)},${left.y.toFixed(1)} ${base.x.toFixed(1)},${base.y.toFixed(1)} ${right.x.toFixed(1)},${right.y.toFixed(1)}" fill="#333"/>`;
-  html += `<circle cx="${cx}" cy="${cy}" r="7" fill="#333"/><circle cx="${cx}" cy="${cy}" r="4" fill="#fff"/>`;
+
+  const needleTip = tfiToPoint(cx, cy, r - 4, tfi);
+  const needleBase = tfiToPoint(cx, cy, -18, tfi);
+  const needleLeft = tfiToPoint(cx, cy, 8, tfi - 4);
+  const needleRight = tfiToPoint(cx, cy, 8, tfi + 4);
+  html += `<polygon points="${needleTip.x.toFixed(1)},${needleTip.y.toFixed(1)} ${needleLeft.x.toFixed(1)},${needleLeft.y.toFixed(1)} ${needleBase.x.toFixed(1)},${needleBase.y.toFixed(1)} ${needleRight.x.toFixed(1)},${needleRight.y.toFixed(1)}" fill="#333"/>`;
+
+  html += `<circle cx="${cx}" cy="${cy}" r="7" fill="#333"/>`;
+  html += `<circle cx="${cx}" cy="${cy}" r="4" fill="#fff"/>`;
+
   svg.innerHTML = html;
 }
+
+// ═══════════════════════════════════════════
+// CHARTS
+// ═══════════════════════════════════════════
+
 let chartP1, chartP2, chartP3;
+
 function initCharts() {
   Chart.defaults.font.family = "system-ui, sans-serif";
   Chart.defaults.font.size = 11;
   Chart.defaults.color = "#555";
+
   const laborXY = laborSeries.map(d => ({ x: d.year, y: d.value }));
   const profitXY = profitSeries.map(d => ({ x: d.year, y: d.value }));
   const laborRadii = laborSeries.map(d => d.type === "measured" ? 4 : 0);
   const profitMeasuredYears = new Set(PROFIT_ANCHORS.filter(a => a.type === "measured").map(a => a.year));
   const profitRadii = profitSeries.map(d => profitMeasuredYears.has(d.year) ? 4 : 0);
+
   chartP1 = new Chart(document.getElementById("chart-p1"), {
     type: "line",
-    data: { datasets: [
-      { label: "Labor share (% nonfarm business output)", data: laborXY, borderColor: "#1a3a5c", borderWidth: 2, pointRadius: laborRadii, pointBackgroundColor: "#1a3a5c", tension: 0.3, fill: false },
-      { label: "Corporate profit share (% of GDP) — estimate", data: profitXY, borderColor: "#C0392B", borderWidth: 2, pointRadius: profitRadii, pointBackgroundColor: "#C0392B", tension: 0.3, fill: false }
-    ]},
-    options: { responsive: true, interaction: { mode: "index", intersect: false },
-      plugins: { legend: { position: "top", labels: { boxWidth: 14, font: { size: 10 } } }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } } },
-      scales: { x: { type: "linear", min: 1947, max: 2026, ticks: { stepSize: 10, callback: v => v }, title: { display: true, text: "Year" } }, y: { min: 0, max: 80, title: { display: true, text: "Share (%)" }, ticks: { callback: v => v + "%" } } }
+    data: {
+      datasets: [
+        {
+          label: "Workers' share of output (%)",
+          data: laborXY,
+          borderColor: "#1a3a5c",
+          backgroundColor: "rgba(26,58,92,0.08)",
+          borderWidth: 2,
+          pointRadius: laborRadii,
+          pointBackgroundColor: "#1a3a5c",
+          tension: 0.3,
+          fill: false
+        },
+        {
+          label: "Corporate profit share (% of GDP) — estimate",
+          data: profitXY,
+          borderColor: "#C0392B",
+          backgroundColor: "rgba(192,57,43,0.07)",
+          borderWidth: 2,
+          pointRadius: profitRadii,
+          pointBackgroundColor: "#C0392B",
+          tension: 0.3,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { position: "top", labels: { boxWidth: 14, font: { size: 10 } } },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } }
+      },
+      scales: {
+        x: {
+          type: "linear",
+          min: 1947, max: 2026,
+          ticks: { stepSize: 10, callback: v => v },
+          title: { display: true, text: "Year" }
+        },
+        y: {
+          min: 0, max: 80,
+          title: { display: true, text: "Share (%)" },
+          ticks: { callback: v => v + "%" }
+        }
+      }
     }
   });
+
   chartP2 = new Chart(document.getElementById("chart-p2"), {
     type: "bar",
-    data: { labels: ["Open e-commerce", "App Store / Play", "Amazon blended (est.)"],
-      datasets: [{ label: "Take-rate (% of seller revenue)", data: [4, 30, 50], backgroundColor: ["rgba(30,107,62,0.8)","rgba(193,127,36,0.8)","rgba(192,57,43,0.8)"], borderColor: ["#1e6b3e","#c17f24","#C0392B"], borderWidth: 1.5 }]
+    data: {
+      labels: ["Open e-commerce", "App Store / Play\n(standard rate)", "Amazon blended\n(fees + ads + FBA)"],
+      datasets: [{
+        label: "Take-rate (% of seller revenue)",
+        data: [4, 30, 50],
+        backgroundColor: ["rgba(30,107,62,0.8)", "rgba(193,127,36,0.8)", "rgba(192,57,43,0.8)"],
+        borderColor: ["#1e6b3e", "#c17f24", "#C0392B"],
+        borderWidth: 1.5
+      }]
     },
-    options: { indexAxis: "y", responsive: true,
-      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => { const n=["~3–5% blended","30% (15% small dev)","~45–51% (estimate)"]; return `${ctx.parsed.x}% — ${n[ctx.dataIndex]}`; } } } },
-      scales: { x: { min: 0, max: 60, title: { display: true, text: "Take-rate (% of seller revenue)" }, ticks: { callback: v => v + "%" } }, y: { ticks: { font: { size: 10 } } } }
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const notes = ["~3–5% blended", "30% (15% small dev)", "~45–51% (estimate)"];
+              return `${ctx.parsed.x}% — ${notes[ctx.dataIndex]}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          min: 0, max: 60,
+          title: { display: true, text: "Cut taken from each sale (%)" },
+          ticks: { callback: v => v + "%" }
+        },
+        y: { ticks: { font: { size: 10 } } }
+      }
     }
   });
+
   const p3years = CONCENTRATION_DATA.map(d => d.year);
+  const p3vals = CONCENTRATION_DATA.map(d => d.value);
   const p3radii = CONCENTRATION_DATA.map(d => d.type === "measured" ? 5 : 2);
+
   chartP3 = new Chart(document.getElementById("chart-p3"), {
     type: "line",
-    data: { labels: p3years, datasets: [
-      { label: "Top-10 S&P 500 share of market cap (%)", data: CONCENTRATION_DATA.map(d => d.value), borderColor: "#C0392B", backgroundColor: "rgba(192,57,43,0.08)", borderWidth: 2.5, pointRadius: p3radii, pointBackgroundColor: p3radii.map(r => r > 2 ? "#C0392B" : "rgba(192,57,43,0.4)"), tension: 0.3, fill: true },
-      { label: "Your feudal threshold", data: p3years.map(() => state.p3_thresh), borderColor: "#c17f24", borderDash: [6,4], borderWidth: 1.5, pointRadius: 0, fill: false }
-    ]},
-    options: { responsive: true,
-      plugins: { legend: { position: "top", labels: { boxWidth: 14, font: { size: 10 } } }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } } },
-      scales: { x: { type: "linear", min: 1999, max: 2027, ticks: { stepSize: 4, callback: v => v }, title: { display: true, text: "Year" } }, y: { min: 0, max: 55, title: { display: true, text: "% of S&P 500 market cap" }, ticks: { callback: v => v + "%" } } }
+    data: {
+      labels: p3years,
+      datasets: [
+        {
+          label: "Top-10 companies' share of S&P 500 (%)",
+          data: p3vals,
+          borderColor: "#C0392B",
+          backgroundColor: "rgba(192,57,43,0.08)",
+          borderWidth: 2.5,
+          pointRadius: p3radii,
+          pointBackgroundColor: p3radii.map(r => r > 2 ? "#C0392B" : "rgba(192,57,43,0.4)"),
+          tension: 0.3,
+          fill: true
+        },
+        {
+          label: "Your 'too dominant' threshold",
+          data: p3years.map(() => state.p3_thresh),
+          borderColor: "#c17f24",
+          borderDash: [6, 4],
+          borderWidth: 1.5,
+          pointRadius: 0,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: "top", labels: { boxWidth: 14, font: { size: 10 } } },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } }
+      },
+      scales: {
+        x: {
+          type: "linear",
+          min: 1999, max: 2027,
+          ticks: { stepSize: 4, callback: v => v },
+          title: { display: true, text: "Year" }
+        },
+        y: {
+          min: 0, max: 55,
+          title: { display: true, text: "% of S&P 500 total value" },
+          ticks: { callback: v => v + "%" }
+        }
+      }
     }
   });
 }
+
+// ═══════════════════════════════════════════
+// UPDATE
+// ═══════════════════════════════════════════
+
 function updateAll() {
-  const scores = [pillar1Score(state.p1_rent/100), pillar2Score(state.p2_dep/100, state.p2_feudal), pillar3Score(state.p3_thresh), pillar4Score(state.p4_ugc/100, state.p4_smb/100)];
+  const scores = [
+    pillar1Score(state.p1_rent / 100),
+    pillar2Score(state.p2_dep / 100, state.p2_feudal),
+    pillar3Score(state.p3_thresh),
+    pillar4Score(state.p4_ugc / 100, state.p4_smb / 100)
+  ];
+
   const tfi = compositeScore(scores, state.weights);
   const info = bandInfo(tfi);
-  const totalW = state.weights.reduce((a,b) => a+b, 0);
+  const totalW = state.weights.reduce((a, b) => a + b, 0);
+
   document.getElementById("tfi-number").textContent = tfi;
   document.getElementById("tfi-number").style.color = info.color;
   document.getElementById("tfi-band").textContent = info.band;
   document.getElementById("tfi-band").style.color = info.color;
   document.getElementById("tfi-verdict").textContent = info.verdict;
   drawGauge(tfi);
+
   const warn = document.getElementById("weight-sum-warn");
-  if (totalW !== 100) { warn.textContent = `⚠ Weights sum to ${totalW}% (normalized to 100% for score)`; warn.style.color = "#c17f24"; } else { warn.textContent = ""; }
-  scores.forEach((s,i) => { const el = document.getElementById(`p${i+1}-badge`); el.textContent = s; el.style.background = badgeColor(s); });
-  scores.forEach((s,i) => { const el = document.getElementById(`p${i+1}-score-badge`); el.textContent = s + " / 100"; el.style.background = badgeColor(s); });
-  if (chartP3) { chartP3.data.datasets[1].data = CONCENTRATION_DATA.map(() => state.p3_thresh); chartP3.update("none"); }
+  if (totalW !== 100) {
+    warn.textContent = `⚠ Weights sum to ${totalW}% (normalized to 100% for score)`;
+    warn.style.color = "#c17f24";
+  } else {
+    warn.textContent = "";
+  }
+
+  scores.forEach((s, i) => {
+    const el = document.getElementById(`p${i+1}-badge`);
+    el.textContent = s;
+    el.style.background = badgeColor(s);
+  });
+
+  scores.forEach((s, i) => {
+    const el = document.getElementById(`p${i+1}-score-badge`);
+    el.textContent = s + " / 100";
+    el.style.background = badgeColor(s);
+  });
+
+  if (chartP3) {
+    chartP3.data.datasets[1].data = CONCENTRATION_DATA.map(() => state.p3_thresh);
+    chartP3.update("none");
+  }
+
+  const actual = 39;
   const vsEl = document.getElementById("p3-vs");
-  if (vsEl) { if (39 > state.p3_thresh) { vsEl.textContent = `above threshold by ${(39-state.p3_thresh).toFixed(0)}pp → feudal signal`; vsEl.style.color = "#C0392B"; } else { vsEl.textContent = `below threshold by ${(state.p3_thresh-39).toFixed(0)}pp → within norm`; vsEl.style.color = "#1a3a5c"; } }
+  if (vsEl) {
+    if (actual > state.p3_thresh) {
+      vsEl.textContent = `above your limit by ${(actual - state.p3_thresh).toFixed(0)}pp → feudal signal`;
+      vsEl.style.color = "#C0392B";
+    } else {
+      vsEl.textContent = `below your limit by ${(state.p3_thresh - actual).toFixed(0)}pp → within normal`;
+      vsEl.style.color = "#1a3a5c";
+    }
+  }
 }
+
+// ═══════════════════════════════════════════
+// CONTROLS
+// ═══════════════════════════════════════════
+
 function setFraming(isFeudal) {
   state.p2_feudal = isFeudal;
   document.getElementById("p2-service-btn").classList.toggle("active", !isFeudal);
   document.getElementById("p2-feudal-btn").classList.toggle("active", isFeudal);
-  document.getElementById("p2-framing-label").textContent = isFeudal ? "Framing: feudal rent extraction (↑ signal)" : "Framing: service pricing (↓ signal)";
+  document.getElementById("p2-framing-label").textContent = isFeudal
+    ? "Your view: unfair tollbooth rent (↑ raises score)"
+    : "Your view: fair service pricing (↓ lowers score)";
   document.getElementById("p2-framing-label").style.color = isFeudal ? "#C0392B" : "#555";
   updateAll();
 }
-function bindControls() {
-  ["w1","w2","w3","w4"].forEach((id,i) => { const el = document.getElementById(id); el.addEventListener("input", () => { state.weights[i] = parseInt(el.value); document.getElementById(`${id}-pct`).textContent = state.weights[i] + "%"; updateAll(); }); });
-  document.getElementById("p1-rent").addEventListener("input", e => { state.p1_rent = parseInt(e.target.value); document.getElementById("p1-rent-val").textContent = state.p1_rent + "%"; updateAll(); });
-  document.getElementById("p2-dep").addEventListener("input", e => { state.p2_dep = parseInt(e.target.value); document.getElementById("p2-dep-val").textContent = state.p2_dep + "%"; updateAll(); });
-  document.getElementById("p3-thresh").addEventListener("input", e => { state.p3_thresh = parseInt(e.target.value); document.getElementById("p3-thresh-val").innerHTML = `Threshold: ${state.p3_thresh}% · Actual: 39% → <span id="p3-vs"></span>`; updateAll(); });
-  document.getElementById("p4-ugc").addEventListener("input", e => { state.p4_ugc = parseInt(e.target.value); document.getElementById("p4-ugc-val").textContent = state.p4_ugc + "%"; updateAll(); });
-  document.getElementById("p4-smb").addEventListener("input", e => { state.p4_smb = parseInt(e.target.value); document.getElementById("p4-smb-val").textContent = state.p4_smb + "%"; updateAll(); });
-}
-const PRESETS = {
-  varoufakis: { weights:[30,30,25,15], p1_rent:90, p2_dep:90, p2_feudal:true, p3_thresh:25, p4_ugc:90, p4_smb:85, note:"Varoufakis view: rent explains most capital-share gains; platform tolls are feudal extraction; today's concentration is historically aberrant; user data is unpaid labor. Requires accepting the strongest version of all four claims simultaneously." },
-  skeptic: { weights:[20,20,40,20], p1_rent:10, p2_dep:20, p2_feudal:false, p3_thresh:50, p4_ugc:10, p4_smb:15, note:"Skeptic / Jacobin view: capital-share gains reflect productivity and intangible investment; platforms compete and offer real services; concentration is cyclical (recall dot-com, Nifty Fifty); users trade data for value. Weights market structure over rent narratives." },
-  centrist: { weights:[25,25,25,25], p1_rent:50, p2_dep:60, p2_feudal:false, p3_thresh:40, p4_ugc:50, p4_smb:50, note:"Centrist economist view: equal pillar weighting, neutral assumptions throughout. Labor share decline is real but causally contested. Platform tolls are high but partly service-based. Concentration is near record highs. The honest position is 'contested.'" },
-  default: { weights:[25,25,25,25], p1_rent:50, p2_dep:60, p2_feudal:false, p3_thresh:40, p4_ugc:50, p4_smb:50, note:null }
-};
-function applyPreset(name) {
-  const p = PRESETS[name]; if (!p) return;
-  Object.assign(state, { weights:[...p.weights], p1_rent:p.p1_rent, p2_dep:p.p2_dep, p2_feudal:p.p2_feudal, p3_thresh:p.p3_thresh, p4_ugc:p.p4_ugc, p4_smb:p.p4_smb });
-  ["w1","w2","w3","w4"].forEach((id,i) => { document.getElementById(id).value = state.weights[i]; document.getElementById(`${id}-pct`).textContent = state.weights[i] + "%"; });
-  document.getElementById("p1-rent").value = state.p1_rent; document.getElementById("p1-rent-val").textContent = state.p1_rent + "%";
-  document.getElementById("p2-dep").value = state.p2_dep; document.getElementById("p2-dep-val").textContent = state.p2_dep + "%";
-  document.getElementById("p3-thresh").value = state.p3_thresh; document.getElementById("p3-thresh-val").innerHTML = `Threshold: ${state.p3_thresh}% · Actual: 39% → <span id="p3-vs"></span>`;
-  document.getElementById("p4-ugc").value = state.p4_ugc; document.getElementById("p4-ugc-val").textContent = state.p4_ugc + "%";
-  document.getElementById("p4-smb").value = state.p4_smb; document.getElementById("p4-smb-val").textContent = state.p4_smb + "%";
-  setFraming(state.p2_feudal);
-  document.querySelectorAll(".preset-btn").forEach(btn => btn.classList.remove("active"));
-  document.querySelector(`[data-preset="${name}"]`).classList.add("active");
-  const noteEl = document.getElementById("preset-note");
-  if (p.note) { noteEl.textContent = p.note; noteEl.classList.add("visible"); } else { noteEl.classList.remove("visible"); }
+
+function setWeightLinked(changedIdx, newValue) {
+  const val = Math.max(0, Math.min(100, newValue));
+  const others = [0, 1, 2, 3].filter(i => i !== changedIdx);
+  const otherSum = others.reduce((s, i) => s + state.weights[i], 0);
+  const remaining = 100 - val;
+
+  if (otherSum === 0) {
+    const base = Math.floor(remaining / 3);
+    others.forEach((idx, j) => { state.weights[idx] = j < 2 ? base : remaining - base * 2; });
+  } else {
+    let allocated = 0;
+    others.forEach((idx, j) => {
+      if (j < 2) {
+        state.weights[idx] = Math.round(state.weights[idx] / otherSum * remaining);
+        allocated += state.weights[idx];
+      } else {
+        state.weights[idx] = remaining - allocated;
+      }
+    });
+  }
+  state.weights[changedIdx] = val;
+
+  const drift = 100 - state.weights.reduce((a, b) => a + b, 0);
+  if (drift !== 0) state.weights[others[others.length - 1]] += drift;
+
+  [0, 1, 2, 3].forEach(i => {
+    document.getElementById(`w${i + 1}`).value = state.weights[i];
+    document.getElementById(`w${i + 1}-pct`).textContent = state.weights[i] + "%";
+  });
   updateAll();
 }
+
+function bindControls() {
+  ["w1","w2","w3","w4"].forEach((id, i) => {
+    document.getElementById(id).addEventListener("input", e => {
+      setWeightLinked(i, parseInt(e.target.value));
+    });
+  });
+
+  document.getElementById("p1-rent").addEventListener("input", e => {
+    state.p1_rent = parseInt(e.target.value);
+    document.getElementById("p1-rent-val").textContent = state.p1_rent + "%";
+    updateAll();
+  });
+
+  document.getElementById("p2-dep").addEventListener("input", e => {
+    state.p2_dep = parseInt(e.target.value);
+    document.getElementById("p2-dep-val").textContent = state.p2_dep + "%";
+    updateAll();
+  });
+
+  document.getElementById("p3-thresh").addEventListener("input", e => {
+    state.p3_thresh = parseInt(e.target.value);
+    document.getElementById("p3-thresh-val").innerHTML = `Your limit: ${state.p3_thresh}% · Actual today: 39% → <span id="p3-vs"></span>`;
+    updateAll();
+  });
+
+  document.getElementById("p4-ugc").addEventListener("input", e => {
+    state.p4_ugc = parseInt(e.target.value);
+    document.getElementById("p4-ugc-val").textContent = state.p4_ugc + "%";
+    updateAll();
+  });
+
+  document.getElementById("p4-smb").addEventListener("input", e => {
+    state.p4_smb = parseInt(e.target.value);
+    document.getElementById("p4-smb-val").textContent = state.p4_smb + "%";
+    updateAll();
+  });
+}
+
+// ═══════════════════════════════════════════
+// PRESETS
+// ═══════════════════════════════════════════
+
+const PRESETS = {
+  varoufakis: {
+    weights: [30, 30, 25, 15],
+    p1_rent: 90, p2_dep: 90, p2_feudal: true,
+    p3_thresh: 25, p4_ugc: 90, p4_smb: 85,
+    note: "Varoufakis's view: most profit growth is rent, not innovation; platform fees are feudal tolls; today's concentration is historically unique; users are unpaid laborers. Requires accepting the strongest form of all four claims at once."
+  },
+  skeptic: {
+    weights: [20, 20, 40, 20],
+    p1_rent: 10, p2_dep: 20, p2_feudal: false,
+    p3_thresh: 50, p4_ugc: 10, p4_smb: 15,
+    note: "The skeptic's view: profit growth reflects real productivity gains; platforms compete and provide genuine value; concentration is historically normal and cyclical; users trade data for services they want. Puts the most weight on market structure."
+  },
+  centrist: {
+    weights: [25, 25, 25, 25],
+    p1_rent: 50, p2_dep: 60, p2_feudal: false,
+    p3_thresh: 40, p4_ugc: 50, p4_smb: 50,
+    note: "The centrist view: equal weight to all four topics, neutral assumptions throughout. Labor share decline is real but its cause is contested. Platform fees are high but partly justified. Concentration is near record levels. The honest answer is: we don't know yet."
+  },
+  default: {
+    weights: [25, 25, 25, 25],
+    p1_rent: 50, p2_dep: 60, p2_feudal: false,
+    p3_thresh: 40, p4_ugc: 50, p4_smb: 50,
+    note: null
+  }
+};
+
+function applyPreset(name) {
+  const p = PRESETS[name];
+  if (!p) return;
+
+  Object.assign(state, {
+    weights: [...p.weights],
+    p1_rent: p.p1_rent, p2_dep: p.p2_dep, p2_feudal: p.p2_feudal,
+    p3_thresh: p.p3_thresh, p4_ugc: p.p4_ugc, p4_smb: p.p4_smb
+  });
+
+  ["w1","w2","w3","w4"].forEach((id, i) => {
+    document.getElementById(id).value = state.weights[i];
+    document.getElementById(`${id}-pct`).textContent = state.weights[i] + "%";
+  });
+  document.getElementById("p1-rent").value = state.p1_rent;
+  document.getElementById("p1-rent-val").textContent = state.p1_rent + "%";
+  document.getElementById("p2-dep").value = state.p2_dep;
+  document.getElementById("p2-dep-val").textContent = state.p2_dep + "%";
+  document.getElementById("p3-thresh").value = state.p3_thresh;
+  document.getElementById("p3-thresh-val").innerHTML = `Your limit: ${state.p3_thresh}% · Actual today: 39% → <span id="p3-vs"></span>`;
+  document.getElementById("p4-ugc").value = state.p4_ugc;
+  document.getElementById("p4-ugc-val").textContent = state.p4_ugc + "%";
+  document.getElementById("p4-smb").value = state.p4_smb;
+  document.getElementById("p4-smb-val").textContent = state.p4_smb + "%";
+  setFraming(state.p2_feudal);
+
+  document.querySelectorAll(".preset-btn").forEach(btn => btn.classList.remove("active"));
+  document.querySelector(`[data-preset="${name}"]`).classList.add("active");
+
+  const noteEl = document.getElementById("preset-note");
+  if (p.note) {
+    noteEl.textContent = p.note;
+    noteEl.classList.add("visible");
+  } else {
+    noteEl.classList.remove("visible");
+  }
+
+  updateAll();
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+
 document.addEventListener("DOMContentLoaded", () => {
   initCharts();
   bindControls();
-  document.querySelectorAll(".preset-btn").forEach(btn => btn.addEventListener("click", () => applyPreset(btn.dataset.preset)));
+
+  document.querySelectorAll(".preset-btn").forEach(btn => {
+    btn.addEventListener("click", () => applyPreset(btn.dataset.preset));
+  });
+
   updateAll();
 });
 </script>
